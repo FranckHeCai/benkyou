@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import Header from "@components/Header"
+import Router from "./router/Router"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1 className='text-3xl'>Benkyou</h1>
-    </>
+    <div className="flex flex-col h-screen bg-slate-200 p-3 sm:p-5">
+      <Header />
+      <Router />
+    </div>
   )
 }
 
