@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <div className="text-slate-800 flex flex-col items-center">
-      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 w-full sm:gap-5">
+      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 w-full gap-5 sm:gap-8">
         {
           levels.map(level => {
             const kanjiList = level === "N1"
@@ -32,7 +32,7 @@ const Home = () => {
             const firstKanji:CompleteKanji = kanjiList[kanjiIndex]
 
             return (
-              <button className="py-1 px-3 rounded flex flex-col justify-center items-center gap-3" onClick={()=>{handleLevel(level)}} key={level}>
+              <button className="rounded flex flex-col justify-center items-center gap-3" onClick={()=>{handleLevel(level)}} key={level}>
 
                   <div className=" w-30 h-30 sm:w-50 sm:h-50 text-4xl sm:text-7xl font-medium rounded-full text-white bg-slate-800 flex items-center justify-center" >{firstKanji.kanji}
                   </div>
