@@ -32,11 +32,11 @@ const Home = () => {
             const firstKanji:CompleteKanji = kanjiList[kanjiIndex]
 
             return (
-              <button className="rounded flex flex-col justify-center items-center gap-3" onClick={()=>{handleLevel(level)}} key={level}>
+              <button className="rounded flex flex-col justify-center items-center gap-1 sm:gap-3" onClick={()=>{handleLevel(level)}} key={level}>
 
                   <div className=" w-30 h-30 sm:w-50 sm:h-50 text-4xl sm:text-7xl font-medium rounded-full text-white bg-slate-800 flex items-center justify-center" >{firstKanji.kanji}
                   </div>
-                  <p className="text-3xl font-bold">{level}</p>
+                  <p className="text-xl sm:text-3xl font-bold">{level}</p>
               </button>
             )
           })
