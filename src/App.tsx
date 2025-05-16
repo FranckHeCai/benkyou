@@ -4,7 +4,7 @@ import Router from "./router/Router"
 function App() {
 
   return (
-    <div className="flex flex-col h-screen bg-slate-200 p-3 sm:p-5">
+    <div className="flex flex-col justify-center items-center h-screen bg-slate-200 p-5">
       <Header />
       <Router />
     </div>

@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { n1, n2, n3, n4, n5 } from "@data/index"
-import type { Word } from "types"
+import type { CompleteKanji } from "types"
 
 type Level = "N1" | "N2" | "N3" | "N4" | "N5"
+
+
 
 const Home = () => {
   const levels:Level[] = ["N1", "N2", "N3", "N4", "N5"]
@@ -14,8 +16,7 @@ const Home = () => {
 
   return (
     <div className="text-slate-800 flex flex-col items-center">
-      <h2 className="mt-2 text-slate-700">Your Pathway to Kanji Mastery.</h2>
-      <div className="mt-5 grid sm:grid-cols-3 w-full gap-3">
+      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 w-full sm:gap-5">
         {
           levels.map(level => {
             const kanjiList = level === "N1"
@@ -28,13 +29,14 @@ const Home = () => {
                     ? n4
                     : n5
             const kanjiIndex = Math.floor(Math.random() * kanjiList.length+1)
-            const firstKanji:Word = kanjiList[kanjiIndex]
+            const firstKanji:CompleteKanji = kanjiList[kanjiIndex]
 
             return (
-              <button className="py-1 px-3 border-2 border-slate-800 rounded" onClick={()=>{handleLevel(level)}} key={level}>
+              <button className="py-1 px-3 rounded flex flex-col justify-center items-center gap-3" onClick={()=>{handleLevel(level)}} key={level}>
 
-                  <div className="w-40 h-40 text-3xl font-medium rounded-full text-white bg-slate-800" >{firstKanji.word}
+                  <div className=" w-30 h-30 sm:w-50 sm:h-50 text-4xl sm:text-7xl font-medium rounded-full text-white bg-slate-800 flex items-center justify-center" >{firstKanji.kanji}
                   </div>
+                  <p className="text-3xl font-bold">{level}</p>
               </button>
             )
           })
