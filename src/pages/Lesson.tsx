@@ -1,6 +1,5 @@
-import { n5 } from "@data/index"
+import { useState } from "react"
 
-const levels = ["N5", "N4", "N3", "N2", "N1"]
 
 // Example kanji data (replace with your real data)
 const exampleKanji = [
@@ -8,8 +7,7 @@ const exampleKanji = [
   { kanji: "一", meaning: "one", onyomi: "イチ, イツ", kunyomi: "ひと" },
 ]
 
-const Study = () => {
-  const [selectedLevel, setSelectedLevel] = useState("N5")
+const Lesson = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   // Replace with kanji data for the selected level
@@ -20,21 +18,6 @@ const Study = () => {
 
   return (
     <div className="flex flex-col items-center gap-8 mt-8">
-      {/* Level Selector */}
-      <div className="flex gap-2">
-        {levels.map((level) => (
-          <button
-            key={level}
-            className={`px-4 py-2 rounded ${selectedLevel === level ? "bg-slate-800 text-white" : "bg-white border-2 border-slate-800"}`}
-            onClick={() => {
-              setSelectedLevel(level)
-              setCurrentIndex(0)
-            }}
-          >
-            {level}
-          </button>
-        ))}
-      </div>
 
       {/* Flashcard */}
       <div className="bg-white rounded shadow p-8 w-80 flex flex-col items-center">
@@ -69,4 +52,4 @@ const Study = () => {
   )
 }
 
-export default Study
+export default Lesson

@@ -9,7 +9,7 @@ const Kanjis = () => {
   const [lessons, setLessons] = useState<KanjiLessons>(null)
   const { kanji } = useParams()
   const handleLesson = (lesson:number) =>{
-    navigate(`/kanji/jlpt/${kanji}/lesson/${lesson}`)
+    navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
   }
 
   useEffect(()=>{
