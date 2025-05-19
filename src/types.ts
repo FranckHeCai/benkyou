@@ -1,4 +1,5 @@
 export type Level = 1 | 2 | 3 | 4 | 5
+
 export type Word = {
   word: string
   meaning: string
@@ -12,6 +13,10 @@ export type KanjiCircleProps = {
   size: string
   text: string
 }
+
+export type KanjiLessons = CompleteKanji[][] | null
+
+export type KanjiLesson = CompleteKanji[]
 
 export type Kanji = {
   strokes:         number;

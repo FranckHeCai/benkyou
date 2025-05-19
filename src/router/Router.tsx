@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from '@pages/Home';
-import N5 from '@pages/N5';
+import Kanjis from '@pages/Kanjis';
 import Header from '@components/Header';
 
 const Router = () => (
@@ -8,7 +8,8 @@ const Router = () => (
     <Header />
     <Routes>
       <Route index element={<Home />} />
-      <Route path="/kanji/N5" element={<N5 />} />
+      <Route path="/kanjis/jlpt/:kanji" element={<Kanjis />} />
+      <Route path="/kanjis/jlpt/:kanji/lesson/:lesson" element={<Kanjis />} />
       <Route path="*" element={<div>404</div>} />
     </Routes>
 </BrowserRouter>
