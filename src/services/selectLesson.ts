@@ -1,6 +1,6 @@
-import { type Level, type CompleteKanji } from "types"
+import { type KanjiLessons, type KanjiLesson, type CompleteKanji } from "types"
 import { n5Lessons, n4Lessons, n3Lessons, n2Lessons, n1Lessons } from "@data/index"
-export const selectLesson = (level:number):CompleteKanji[][] => {
+export const selectLessons = (level:number):KanjiLessons => {
   return level === 5 
   ? n5Lessons
   : level === 4
@@ -10,4 +10,9 @@ export const selectLesson = (level:number):CompleteKanji[][] => {
       : level === 2
         ? n2Lessons
         : n1Lessons
+}
+
+export const selectLesson = (level:number, index:number):KanjiLesson => {
+  const lesson = selectLessons(level)
+  return lesson?.[index] ?? null;
 }

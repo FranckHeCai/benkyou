@@ -9,14 +9,14 @@ export type Word = {
 }
 
 export type KanjiCircleProps = {
-  children: string
+  children: React.ReactNode 
   size: string
   text: string
 }
 
 export type KanjiLessons = CompleteKanji[][] | null
 
-export type KanjiLesson = CompleteKanji[]
+export type KanjiLesson = CompleteKanji[] | null
 
 export type Kanji = {
   strokes:         number;
