@@ -7,6 +7,11 @@ export type Word = {
   level: Level
 }
 
+export type KanjiCircleProps = {
+  children: string
+  size: number
+}
+
 export type Kanji = {
   strokes:         number;
   grade:           number | null;

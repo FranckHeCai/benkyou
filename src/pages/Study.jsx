@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { n5 } from "@data/index"
 
 const levels = ["N5", "N4", "N3", "N2", "N1"]
 
@@ -8,7 +8,7 @@ const exampleKanji = [
   { kanji: "一", meaning: "one", onyomi: "イチ, イツ", kunyomi: "ひと" },
 ]
 
-const N1 = () => {
+const Study = () => {
   const [selectedLevel, setSelectedLevel] = useState("N5")
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -69,4 +69,4 @@ const N1 = () => {
   )
 }
 
-export default N1
+export default Study
