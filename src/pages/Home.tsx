@@ -36,7 +36,9 @@ const Home = () => {
 
                   {/* <div className=" w-30 h-30 sm:w-50 sm:h-50 text-4xl sm:text-7xl font-medium rounded-full text-white bg-slate-800 flex items-center justify-center" >{firstKanji.kanji}
                   </div> */}
-                  <KanjiCircle size={30}>{firstKanji.kanji}</KanjiCircle>
+                  <KanjiCircle size={"w-30 h-30 sm:w-45 sm:h-45"} text={"text-4xl sm:text-6xl"}>
+                      {firstKanji.kanji}
+                  </KanjiCircle>
                   <p className="text-xl sm:text-3xl font-bold">{level}</p>
               </button>
             )

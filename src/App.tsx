@@ -1,11 +1,9 @@
-import Header from "@components/Header"
 import Router from "./router/Router"
 
 function App() {
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-slate-200 p-5">
-      <Header />
+    <div className="flex flex-col p-5 gap-5 sm:gap-7">
       <Router />
     </div>
   )

@@ -9,7 +9,8 @@ export type Word = {
 
 export type KanjiCircleProps = {
   children: string
-  size: number
+  size: string
+  text: string
 }
 
 export type Kanji = {

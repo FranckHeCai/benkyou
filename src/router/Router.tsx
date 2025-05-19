@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from '@pages/Home';
 import N5 from '@pages/N5';
+import Header from '@components/Header';
 
 const Router = () => (
   <BrowserRouter>
+    <Header />
     <Routes>
       <Route index element={<Home />} />
       <Route path="/kanji/N5" element={<N5 />} />
