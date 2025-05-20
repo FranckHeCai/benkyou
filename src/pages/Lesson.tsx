@@ -1,3 +1,4 @@
+import BackIcon from "@icons/BackIcon"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { selectLesson } from "services/selectLesson"
@@ -78,6 +79,9 @@ const Lesson = () => {
           }
         </div>
       </div>
+      <span>
+        <BackIcon />
+      </span>
     </div>
   )
 }

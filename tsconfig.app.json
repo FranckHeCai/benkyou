@@ -6,6 +6,7 @@
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
       "@data/*": ["data/*"],
+      "@icons/*": ["icons/*"],
       "@router/*": ["router/*"]
     },
 

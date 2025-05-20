@@ -29,8 +29,8 @@ const Kanjis = () => {
               {lesson && lesson[0].kanji}
               </KanjiCircle>
               <div>
-                <h2 className="text-center font-medium text-slate-800 mb-2">Lesson {index+1}</h2>
-                <p className="flex gap-1 text-slate-800 text-sm">
+                <h2 className="text-center text-xl font-medium text-slate-800 mb-1">Lesson {index+1}</h2>
+                <p className="flex sm:justify-center gap-1 text-slate-800 text-sm">
                   { lesson &&
                     lesson.map((kanji:CompleteKanji)=>{
                       return(
