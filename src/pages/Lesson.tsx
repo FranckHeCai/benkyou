@@ -33,13 +33,13 @@ const Lesson = () => {
         <div className="w-full sm:w-sm h-80 sm:h-100 bg-white rounded-lg shadow p-8 flex flex-col justify-center items-center gap-4">
         <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
         <div className="text-center">
-          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-1 mb-1">
+          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
             <h2 className="font-semibold">Onyomi:</h2>
-            <p className="text-center">{currentLesson[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')}</p>
+            <p className="text-center text-2xl">{currentLesson[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')}</p>
           </div>
-          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-1">
+          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center">
             <h2 className="font-semibold">Kunyomi:</h2>
-            <p className="text-center">{currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')}</p> 
+            <p className="text-center text-2xl">{currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')}</p> 
             
           </div>
         </div>
