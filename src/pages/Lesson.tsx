@@ -1,3 +1,5 @@
+import LeftArrow from "@icons/LeftArrow"
+import RightArrow from "@icons/RightArrow"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { selectLesson } from "services/selectLesson"
@@ -25,12 +27,38 @@ const Lesson = () => {
 
   const selectKanji = (index:number) => {
     setCurrentIndex(index)
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const handleNextLesson = () =>{
+
+  }
+
+  const handlePreviousLesson = () =>{
+
   }
 
   return (
-    <div className=" flex flex-col items-center gap-8">
+    <div className=" flex flex-col items-center gap-6">
+      <div className="w-full max-w-lg flex justify-between text-slate-800 text-sm sm:text-base font-medium">
+        <button
+          className="px-4 py-2 bg-gray-200 rounded flex items-center gap-2"
+          onClick={handlePreviousLesson}
+        >
+          <LeftArrow />
+          Previous lesson
+        </button>
+        <button
+          className="px-4 py-2 bg-gray-200 rounded flex items-center gap-2"
+          onClick={handleNextLesson}
+        >
+          Next lesson
+          <RightArrow />
+        </button>
+      </div>
+      
       { currentLesson &&
-        <div className="w-full sm:w-sm h-80 sm:h-100 bg-white rounded-lg shadow p-8 flex flex-col justify-center items-center gap-4">
+        <div className="w-full sm:w-sm min-h-80 sm:h-100 bg-white rounded-lg shadow p-8 flex flex-col justify-center items-center gap-4">
         <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
         <div className="text-center">
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
@@ -39,7 +67,12 @@ const Lesson = () => {
           </div>
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center">
             <h2 className="font-semibold">Kunyomi:</h2>
-            <p className="text-center text-2xl">{currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')}</p> 
+            <p className="text-center text-2xl flex items-center justify-center">{
+              currentLesson[currentIndex].wk_readings_kun?.length === 0 
+                ? <p className="text-lg text-gray-500">none</p>
+                : currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')
+                
+            }</p> 
             
           </div>
         </div>

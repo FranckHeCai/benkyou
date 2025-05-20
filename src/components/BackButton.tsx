@@ -5,6 +5,7 @@ const BackButton = () => {
 
     const handleBack = () => {
     navigate(-1)
+    window.scrollTo({top:0})
   }
     return (
         <button onClick={handleBack} className="absolute top-8 left-11">

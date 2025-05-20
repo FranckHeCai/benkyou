@@ -10,6 +10,7 @@ const Kanjis = () => {
   const { kanji } = useParams()
   const handleLesson = (lesson:number) =>{
     navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
+    window.scrollTo({top: 0})
   }
 
   useEffect(()=>{
