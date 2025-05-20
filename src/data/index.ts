@@ -6,7 +6,7 @@ import _n5 from './n5.json'
 import kanjis from './kanji.json'
 import { type CompleteKanji, type Level } from '../types'
 
-const lessonSize = 5
+const lessonSize = 4
 
 const filterKanji = (level:Level):CompleteKanji[] =>{
   return all.filter(kanji => kanji.jlpt_new === level)

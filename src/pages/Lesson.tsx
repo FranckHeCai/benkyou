@@ -14,26 +14,36 @@ const Lesson = () => {
     setCurrentLesson(selectLesson(kanjiLevel, kanjiLesson))
   },[])
 
-  const handlePrev = () => setCurrentIndex((i) => Math.max(i - 1, 0))
-  const handleNext = () => setCurrentIndex((i) => {
-    if(!currentLesson) return i
-    return Math.min(i + 1, currentLesson.length - 1)
+  const handlePrev = () => setCurrentIndex((prev):number => {
+    if(prev === 0) return prev
+    return prev - 1
+  })
+  const handleNext = () => setCurrentIndex((prev):number => {
+    if(!currentLesson || prev === currentLesson.length - 1) return prev
+    return prev + 1
   })
 
+  const selectKanji = (index:number) => {
+    setCurrentIndex(index)
+  }
+
   return (
-    <div className="flex flex-col items-center gap-8 mt-8">
-
-
+    <div className=" flex flex-col items-center gap-8">
       { currentLesson &&
-        <div className="bg-white rounded shadow p-8 w-80 flex flex-col items-center">
-        <div className="text-7xl mb-4">{currentLesson[currentIndex].kanji}</div>
-        <div className="text-lg text-gray-700 mb-1">
-          <span className="font-semibold">Onyomi:</span> {currentLesson[currentIndex].readings_on}
+        <div className="w-full sm:w-sm h-80 sm:h-100 bg-white rounded-lg shadow p-8 flex flex-col justify-center items-center gap-4">
+        <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
+        <div className="text-center">
+          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-1 mb-1">
+            <h2 className="font-semibold">Onyomi:</h2>
+            <p className="text-center">{currentLesson[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')}</p>
+          </div>
+          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-1">
+            <h2 className="font-semibold">Kunyomi:</h2>
+            <p className="text-center">{currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')}</p> 
+            
+          </div>
         </div>
-        <div className="text-lg text-gray-700 mb-1">
-          <span className="font-semibold">Kunyomi:</span> {currentLesson[currentIndex].readings_kun}
-        </div>
-        <div className="text-md text-gray-500">{currentLesson[currentIndex].meanings}</div>
+        <div className="text-center text-xl text-gray-500">{currentLesson[currentIndex].meanings.join(', ')}</div>
       </div>
       }
 
@@ -52,6 +62,21 @@ const Lesson = () => {
         >
           Next
         </button>
+      </div>
+
+      <div className="w-full sm:w-fit">
+        <h3 className="text-center font-medium mb-4">Lesson Kanjis</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          { currentLesson &&
+            currentLesson.map((kanji, index) =>{
+              return(
+                <button key={kanji.kanji} onClick={()=>{selectKanji(index)}} className="p-10 bg-white rounded-lg shadow-md">
+                  <p className="text-xl sm:text-5xl ">{kanji.kanji}</p>
+                </button>
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   )
