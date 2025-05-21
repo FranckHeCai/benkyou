@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { n1, n2, n3, n4, n5 } from "@data/index"
-import type { CompleteKanji, Level } from "types"
+import type { Level } from "types"
 import KanjiCircle from "@components/KanjiCircle"
 
 
@@ -27,13 +27,10 @@ const Home = () => {
                     ? n4
                     : n5
             const kanjiIndex = Math.floor(Math.random() * kanjiList.length+1)
-            const firstKanji:CompleteKanji = kanjiList[kanjiIndex]
+            const firstKanji = kanjiList[kanjiIndex]
 
             return (
               <button className="rounded flex flex-col justify-center items-center gap-1 sm:gap-3" onClick={()=>{handleLevel(level)}} key={level}>
-
-                  {/* <div className=" w-30 h-30 sm:w-50 sm:h-50 text-4xl sm:text-7xl font-medium rounded-full text-white bg-slate-800 flex items-center justify-center" >{firstKanji.kanji}
-                  </div> */}
                   <KanjiCircle size={"w-30 h-30 sm:w-45 sm:h-45"} text={"text-4xl sm:text-6xl"}>
                       {firstKanji.kanji}
                   </KanjiCircle>

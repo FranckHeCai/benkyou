@@ -1,20 +1,22 @@
 import LeftArrow from "@icons/LeftArrow"
 import RightArrow from "@icons/RightArrow"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { selectLesson } from "services/selectLesson"
-import type { KanjiLesson } from "types"
+import { useNavigate, useParams } from "react-router-dom"
+import { useKanjiStore } from "store/store"
 
 const Lesson = () => {
-  const [currentLesson, setCurrentLesson] = useState<KanjiLesson>(null)
+  // const [currentLesson, setCurrentLesson] = useState<KanjiLesson>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const navigate = useNavigate()
   const { kanji, lesson} = useParams()
+  const { kanjiLessons, setCurrentLesson, currentLesson } = useKanjiStore(state => state)
 
   useEffect(()=>{
-    const kanjiLevel = Number(kanji)
     const kanjiLesson = Number(lesson)
-    setCurrentLesson(selectLesson(kanjiLevel, kanjiLesson))
-  },[])
+    if(kanjiLessons){
+      setCurrentLesson(kanjiLessons[kanjiLesson])
+    }
+  },[lesson, kanjiLessons])
 
   const handlePrev = () => setCurrentIndex((prev):number => {
     if(prev === 0) return prev
@@ -25,25 +27,27 @@ const Lesson = () => {
     return prev + 1
   })
 
+  const handlePrevLesson = () => {
+    if(Number(lesson) === 0) return 
+    navigate(`/kanjis/jlpt/${kanji}/lesson/${Number(lesson) - 1}`)
+  }
+  const handleNextLesson = () => {
+    if(!kanjiLessons || kanjiLessons?.length - 1 === Number(lesson)) return
+    navigate(`/kanjis/jlpt/${kanji}/lesson/${Number(lesson) + 1}`)
+  }
+
   const selectKanji = (index:number) => {
     setCurrentIndex(index)
     window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
-  const handleNextLesson = () =>{
-
-  }
-
-  const handlePreviousLesson = () =>{
-
   }
 
   return (
     <div className=" flex flex-col items-center gap-6">
       <div className="w-full max-w-lg flex justify-between text-slate-800 text-sm sm:text-base font-medium">
         <button
-          className="px-4 py-2 bg-gray-200 rounded flex items-center gap-2"
-          onClick={handlePreviousLesson}
+          className="px-4 py-2 bg-gray-200 rounded flex items-center gap-2 disabled:opacity-50"
+          onClick={handlePrevLesson}
+          disabled={Number(lesson) === 0}
         >
           <LeftArrow />
           Previous lesson

@@ -1,13 +1,14 @@
 import KanjiCircle from "@components/KanjiCircle"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { selectLessons } from "services/selectLesson"
-import { type KanjiLessons, type CompleteKanji, type KanjiLesson } from "types"
+import { useKanjiStore } from "store/store"
+import { type CompleteKanji, type KanjiLesson } from "types"
 
 const Kanjis = () => {
   const navigate = useNavigate()
-  const [lessons, setLessons] = useState<KanjiLessons>(null)
   const { kanji } = useParams()
+  const { kanjiLessons, setKanjiLessons } = useKanjiStore(state => state)
   const handleLesson = (lesson:number) =>{
     navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
     window.scrollTo({top: 0})
@@ -16,14 +17,15 @@ const Kanjis = () => {
   useEffect(()=>{
     const kanjiLevel = Number(kanji)
     if(kanjiLevel!==undefined){
-      setLessons(selectLessons(kanjiLevel))
+      // setLessons(selectLessons(kanjiLevel))
+      setKanjiLessons(selectLessons(kanjiLevel))
     }
   },[kanji])
 
   return (
     <div className=" grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-5">
-      { lessons &&
-        lessons.map((lesson:KanjiLesson, index) => {
+      { kanjiLessons &&
+        kanjiLessons.map((lesson:KanjiLesson, index) => {
           return (
             <button onClick={()=>{handleLesson(index)}} key={`n5 lesson ${index+1}`} className="w-full flex items-center sm:flex-col gap-4">
               <KanjiCircle size={"w-20 h-20 sm:w-30 sm:h-30"} text={"text-xl sm:text-3xl"}>
