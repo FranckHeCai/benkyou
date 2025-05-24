@@ -12,6 +12,8 @@ interface KanjiState {
   setKanjiLessons: (kanjiLessons: KanjiLessons) => void;
   currentLesson: KanjiLesson;
   setCurrentLesson: (currentLesson: KanjiLesson) => void;
+  popup: boolean;
+  setPopup: ()=>void;
 }
 
 export const useKanjiStore = create<KanjiState>()(persist((set) => ({
@@ -22,7 +24,9 @@ export const useKanjiStore = create<KanjiState>()(persist((set) => ({
   kanjiLessons: null,
   setKanjiLessons: (kanjiLessons) => set({kanjiLessons}),
   currentLesson: null,
-  setCurrentLesson: (currentLesson) => set({currentLesson})
+  setCurrentLesson: (currentLesson) => set({currentLesson}),
+  popup: false,
+  setPopup: () => set((state) => ({ popup: !state.popup }))
 }),
  {
         name: 'Kanji store', 
