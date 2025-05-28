@@ -29,7 +29,7 @@ const Practice = () => {
     }else{
       setShuffledAnswers([])
     }
-    const questionIndex = Math.floor(Math.random() * 3)
+        const questionIndex = Math.floor(Math.random() * 3)
     setQuestionType(questionTypes[questionIndex])
     setCurrentAnswerIndex(null)
     setChecked(false)
@@ -48,7 +48,6 @@ const Practice = () => {
 
   const handleCheckAnswer = () => {
     if (!currentLesson || !currentAnswer) return;
-    setQuestionType("")
     const currentKanji = currentLesson[currentIndex];
     const selectedKanji = currentAnswer;
 
@@ -101,7 +100,7 @@ const Practice = () => {
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
             <h2 className="font-semibold">Onyomi:</h2>
             <p className="text-center text-2xl">
-              { questionType === "onyomi"
+              { questionType === "onyomi" && !checked
                   ? "????"
                   : currentLesson[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')
               }
@@ -110,7 +109,7 @@ const Practice = () => {
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center">
             <h2 className="font-semibold">Kunyomi:</h2>
             <p className="text-center text-2xl flex items-center justify-center">{
-              questionType === "kunyomi"
+              questionType === "kunyomi" && !checked
               ? "????"
               : currentLesson[currentIndex].wk_readings_kun?.length === 0 
                   ? <p className="text-lg text-gray-500">none</p>
@@ -122,7 +121,7 @@ const Practice = () => {
           </div>
         </div>
         <div className="text-center text-xl text-gray-500">
-          { questionType === "meaning"
+          { questionType === "meaning" && !checked
             ? "????"
             : currentLesson[currentIndex].meanings.join(', ')
           
