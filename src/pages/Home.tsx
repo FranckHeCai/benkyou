@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { n1, n2, n3, n4, n5 } from "@data/index"
 import type { Level } from "types"
 import KanjiCircle from "@components/KanjiCircle"
+import Header from "@components/Header"
 
 
 
@@ -14,6 +15,7 @@ const Home = () => {
 
   return (
     <div className="text-slate-800 flex flex-col items-center">
+      <Header />
       <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 w-full gap-5 sm:gap-8">
         {
           levels.map(level => {

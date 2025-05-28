@@ -8,6 +8,8 @@ export type Word = {
   level: Level
 }
 
+export type QuestionType = "onyomi" | "kunyomi" | "meaning" | ""
+
 export type KanjiCircleProps = {
   children: React.ReactNode 
   size: string

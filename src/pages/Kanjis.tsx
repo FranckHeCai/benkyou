@@ -1,3 +1,4 @@
+import BackButton from "@components/BackButton"
 import KanjiCircle from "@components/KanjiCircle"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
@@ -24,7 +25,8 @@ const Kanjis = () => {
 
   return (
     <div className="">
-      <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-2 sm:mb-5">JLPT {kanji}</h1>
+      <BackButton route="/" />
+      <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-10 mt-4 sm:mt-0">JLPT {kanji}</h1>
       <div className="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-5">
         { kanjiLessons &&
           kanjiLessons.map((lesson:KanjiLesson, index) => {

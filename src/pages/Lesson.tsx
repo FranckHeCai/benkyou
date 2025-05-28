@@ -1,3 +1,4 @@
+import BackButton from "@components/BackButton"
 import Popup from "@components/Popup"
 import InfoIcon from "@icons/InfoIcon"
 import LeftArrow from "@icons/LeftArrow"
@@ -49,7 +50,9 @@ const Lesson = () => {
   }
 
   return (
-    <div className=" flex flex-col items-center gap-6">
+    <div className=" flex flex-col items-center gap-4">
+      <BackButton route={`/kanjis/jlpt/${kanji}`} />
+      <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl">JLPT {kanji}</h1>
       <div className="w-full max-w-xl flex justify-between items-center text-slate-800 text-sm sm:text-base font-medium">
         <button
           className=" text-xs sm:text-base py-2 bg-gray-200 rounded flex items-center gap-1 sm:gap-2 disabled:opacity-50"
@@ -61,7 +64,7 @@ const Lesson = () => {
         </button>
         <h2 className="font-bold">Lesson {lesson ? Number(lesson) + 1 : ""}</h2>
         <button
-          className="text-xs sm:text-base py-2 bg-gray-200 rounded gap-1 sm:gap-2 flex items-center gap-2"
+          className="text-xs sm:text-base py-2 bg-gray-200 rounded gap-1 sm:gap-2 flex items-center"
           onClick={handleNextLesson}
         >
           <div className="hidden sm:block">Next lesson</div>
@@ -70,7 +73,7 @@ const Lesson = () => {
       </div>
       
       { currentLesson &&
-        <div className="relative w-full sm:w-sm min-h-80 sm:h-100 bg-white rounded-lg shadow p-8 flex flex-col justify-center items-center gap-4 ">
+        <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
         <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
         <div className="text-center">
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
@@ -90,7 +93,7 @@ const Lesson = () => {
         </div>
         <div className="text-center text-xl text-gray-500">{currentLesson[currentIndex].meanings.join(', ')}</div>
         <button onClick={setPopup} className="absolute top-5 right-5"> <InfoIcon /> </button>
-      </div>
+        </div>
       }
 
       <div className="flex gap-4">
@@ -116,7 +119,7 @@ const Lesson = () => {
           { currentLesson &&
             currentLesson.map((kanji, index) =>{
               return(
-                <button key={kanji.kanji} onClick={()=>{selectKanji(index)}} className={`${index === currentIndex ? "border-2 border-slate-800" : ""} p-10 bg-white rounded-lg shadow-md`}>
+                <button key={kanji.kanji} onClick={()=>{selectKanji(index)}} className={`${index === currentIndex ? "border-2 border-slate-800" : ""} p-7 bg-white rounded-lg shadow-md`}>
                   <p className="text-xl sm:text-5xl ">{kanji.kanji}</p>
                 </button>
               )
