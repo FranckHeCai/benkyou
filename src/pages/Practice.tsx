@@ -18,7 +18,6 @@ const Practice = () => {
 
   useEffect(() => {
     setCurrentIndex(0)
-    console.log(kanjiPracticeArray)
     // const kanjiLesson = Number(lesson)
     // if(kanjiLessons){
     //   setCurrentLesson(kanjiLessons[kanjiLesson])
@@ -32,9 +31,7 @@ const Practice = () => {
       new Map(filteredKanjis.map(k => [k.kanji, k])).values()
     );
     const reducedKanjis = uniqueKanjis.slice(0,3)
-    console.log("filtered then reduced kanjis: ",filteredKanjis, reducedKanjis)
     const shuffledAnswers = shuffleKanjis([kanjiPracticeArray[currentIndex], ...reducedKanjis])
-    console.log("shuffled answers: ", shuffledAnswers)
     setAnswers(shuffledAnswers)
   }, [currentIndex, kanjiPracticeArray])
 
