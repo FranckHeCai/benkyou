@@ -78,7 +78,7 @@ const Lesson = () => {
       </div>
       
       { currentLesson &&
-        <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
+        <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-6 flex flex-col justify-center items-center gap-4 ">
         <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
         <div className="text-center">
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">

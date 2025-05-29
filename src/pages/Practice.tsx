@@ -39,7 +39,12 @@ const Practice = () => {
   },[currentLesson, currentIndex])
 
   const shuffleAnswers = (array:CompleteKanji[]) =>{
-    return [...array].sort(()=> Math.random() - 0.5 )
+    const newArray = Array.from({length: 4}, ()=>{
+      const randomIndex = Math.floor(Math.random() * array.length)
+      return array[randomIndex]
+    })
+    const finalArray = [...array, ...newArray].sort(()=> Math.random() - 0.5 )
+    return finalArray
   }
 
   const selectKanji = (index:number) => {
@@ -47,8 +52,8 @@ const Practice = () => {
   }
 
   const handleCheckAnswer = () => {
-    if (!currentLesson || !currentAnswer) return;
-    const currentKanji = currentLesson[currentIndex];
+    if (!shuffledAnswers || !currentAnswer) return;
+    const currentKanji = shuffledAnswers[currentIndex];
     const selectedKanji = currentAnswer;
 
     let isCorrect = false;
@@ -79,7 +84,7 @@ const Practice = () => {
 
   const handleNextKanji = () => {
     setCurrentIndex((prev):number => {
-      if(!currentLesson || prev === currentLesson.length - 1) return prev
+      if(!shuffledAnswers || prev === shuffledAnswers.length - 1) return prev
       window.scrollTo({ top: 0, behavior: "smooth" })
       return prev + 1
     })
@@ -93,16 +98,16 @@ const Practice = () => {
     <div className="flex flex-col items-center gap-4">
       <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">Kanji Practice</h1>
       <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Lesson {Number(lesson) + 1}</h2>
-      { currentLesson && 
+      { shuffledAnswers.length > 0 && 
         <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
-        <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
+        <div className="text-7xl">{shuffledAnswers[currentIndex].kanji}</div>
         <div className="text-center">
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
             <h2 className="font-semibold">Onyomi:</h2>
             <p className="text-center text-2xl">
               { questionType === "onyomi" && !checked
                   ? "????"
-                  : currentLesson[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')
+                  : shuffledAnswers[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')
               }
             </p>
           </div>
@@ -111,9 +116,9 @@ const Practice = () => {
             <p className="text-center text-2xl flex items-center justify-center">{
               questionType === "kunyomi" && !checked
               ? "????"
-              : currentLesson[currentIndex].wk_readings_kun?.length === 0 
+              : shuffledAnswers[currentIndex].wk_readings_kun?.length === 0 
                   ? <p className="text-lg text-gray-500">none</p>
-                  : currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')
+                  : shuffledAnswers[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')
               
                 
             }</p> 
@@ -123,7 +128,7 @@ const Practice = () => {
         <div className="text-center text-xl text-gray-500">
           { questionType === "meaning" && !checked
             ? "????"
-            : currentLesson[currentIndex].meanings.join(', ')
+            : shuffledAnswers[currentIndex].meanings.join(', ')
           
           }</div>
       </div>
@@ -131,8 +136,8 @@ const Practice = () => {
 
       <p>Select the correct answer</p>
       <div className="w-full sm:w-fit grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
-        {shuffledAnswers &&
-          shuffledAnswers.map((kanji, index) => {
+        {currentLesson &&
+          currentLesson.map((kanji, index) => {
 
             return(
               <button disabled={checked} key={kanji.kanji} onClick={()=>{
@@ -167,13 +172,13 @@ const Practice = () => {
       </div>
       <button disabled={currentAnswerIndex === null} onClick={()=>{
         checked && currentLesson
-        ? currentIndex === currentLesson?.length - 1
+        ? currentIndex === shuffledAnswers?.length - 1
           ? handleFinishPractice()
           : handleNextKanji()
         : handleCheckAnswer()
       }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
         { checked && currentLesson
-            ? currentIndex === currentLesson?.length - 1
+            ? currentIndex === shuffledAnswers?.length - 1
               ? "End practice"
               : "Next Kanji"
             : "Confirm"
