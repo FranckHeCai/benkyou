@@ -5,6 +5,7 @@ import LeftArrow from "@icons/LeftArrow"
 import RightArrow from "@icons/RightArrow"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { shuffleKanjis } from "services/shuffle"
 import { useKanjiStore } from "store/store"
 
 const Lesson = () => {
@@ -12,7 +13,7 @@ const Lesson = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const navigate = useNavigate()
   const { kanji, lesson} = useParams()
-  const { kanjiLessons, setCurrentLesson, currentLesson, popup, setPopup } = useKanjiStore(state => state)
+  const { kanjiLessons, setCurrentLesson, currentLesson, popup, setPopup, setKanjiPracticeArray } = useKanjiStore(state => state)
 
   useEffect(()=>{
     setCurrentIndex(0)
@@ -50,6 +51,14 @@ const Lesson = () => {
   }
 
   const handlePractice = () => {
+    if(currentLesson){
+      const newArray = Array.from({length: 4}, ()=>{
+        const randomIndex = Math.floor(Math.random() * currentLesson.length)
+        return currentLesson[randomIndex]
+      })
+      const shuffledKanjis = shuffleKanjis([...newArray, ...currentLesson])
+      setKanjiPracticeArray(shuffledKanjis)
+    }
     navigate(`/kanjis/jlpt/${kanji}/practice/${lesson}`)
     window.scrollTo({top: 0, behavior: "smooth"})
   }

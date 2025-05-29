@@ -16,6 +16,10 @@ export type KanjiCircleProps = {
   text: string
 }
 
+export type KanjiPracticeArray = CompleteKanji[]
+
+export type KanjiLevel = CompleteKanji[]
+
 export type KanjiLessons = CompleteKanji[][] | null
 
 export type KanjiLesson = CompleteKanji[] | null

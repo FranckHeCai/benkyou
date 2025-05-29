@@ -2,14 +2,14 @@ import BackButton from "@components/BackButton"
 import KanjiCircle from "@components/KanjiCircle"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { selectLessons } from "services/selectLesson"
+import { selectLessons, selectLevel } from "services/selectLesson"
 import { useKanjiStore } from "store/store"
 import { type CompleteKanji, type KanjiLesson } from "types"
 
 const Kanjis = () => {
   const navigate = useNavigate()
   const { kanji } = useParams()
-  const { kanjiLessons, setKanjiLessons } = useKanjiStore(state => state)
+  const { kanjiLessons, setKanjiLessons, setKanjiLevel } = useKanjiStore(state => state)
   const handleLesson = (lesson:number) =>{
     navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
     window.scrollTo({top: 0})
@@ -19,6 +19,7 @@ const Kanjis = () => {
     const kanjiLevel = Number(kanji)
     if(kanjiLevel!==undefined){
       // setLessons(selectLessons(kanjiLevel))
+      setKanjiLevel(selectLevel(kanjiLevel))
       setKanjiLessons(selectLessons(kanjiLevel))
     }
   },[kanji])
