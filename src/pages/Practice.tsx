@@ -29,7 +29,10 @@ const Practice = () => {
     }else{
       setShuffledAnswers([])
     }
-        const questionIndex = Math.floor(Math.random() * 3)
+  }, [currentLesson])
+
+  useEffect(()=>{
+    const questionIndex = Math.floor(Math.random() * 3)
     setQuestionType(questionTypes[questionIndex])
     setCurrentAnswerIndex(null)
     setChecked(false)
