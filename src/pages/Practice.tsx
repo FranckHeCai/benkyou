@@ -1,6 +1,5 @@
-import InfoIcon from "@icons/InfoIcon";
-import { use, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useKanjiStore } from "store/store";
 import type { CompleteKanji, KanjiLesson, QuestionType } from "types";
 const Practice = () => {
@@ -14,6 +13,7 @@ const Practice = () => {
   const [checked, setChecked] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const questionTypes:QuestionType[] = ["onyomi", "kunyomi" , "meaning"]
+  const navigate = useNavigate()
 
   useEffect(() => {
     setCurrentIndex(0)
@@ -86,13 +86,13 @@ const Practice = () => {
   }
 
   const handleFinishPractice = () =>{
-
+    navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
   }
 
   return (
     <div className="flex flex-col items-center gap-4">
       <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">Kanji Practice</h1>
-      <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji}</h2>
+      <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Lesson {Number(lesson) + 1}</h2>
       { currentLesson && 
         <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
         <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
@@ -135,7 +135,7 @@ const Practice = () => {
           shuffledAnswers.map((kanji, index) => {
 
             return(
-              <button key={kanji.kanji} onClick={()=>{
+              <button disabled={checked} key={kanji.kanji} onClick={()=>{
                 selectKanji(index)
                 setCurrentAnswer(kanji)
                 }} className={
@@ -145,18 +145,18 @@ const Practice = () => {
                         : "bg-red-500 text-white"
                       : index === currentAnswerIndex 
                       ? "bg-slate-800 text-white" 
-                      : "bg-white"
+                      : "bg-white disabled:opacity-50"
                     } 
                     p-5  rounded-lg shadow-md`
                   }>
                   <p className="text-base sm:text-lg ">
                     { questionType === "kunyomi"
-                        ? kanji.readings_kun.length === 0
+                        ? kanji.wk_readings_kun?.length === 0
                           ? "none"
-                          :  kanji.readings_kun.map(word => word.replace(/^!/, "")).join(' | ')
+                          :  kanji.wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')
                         : questionType === "onyomi"
-                          ? kanji.readings_on.map(word => word.replace(/^!/, "")).join(' | ')
-                          : kanji.meanings
+                          ? kanji.wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')
+                          : kanji.meanings.map(word => word.replace(/^!/, "")).join(" | ")
                     }
                   </p>
                 </button>

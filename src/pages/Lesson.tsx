@@ -49,6 +49,11 @@ const Lesson = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
+  const handlePractice = () => {
+    navigate(`/kanjis/jlpt/${kanji}/practice/${lesson}`)
+    window.scrollTo({top: 0, behavior: "smooth"})
+  }
+
   return (
     <div className=" flex flex-col items-center gap-4">
       <BackButton route={`/kanjis/jlpt/${kanji}`} />
@@ -85,7 +90,7 @@ const Lesson = () => {
             <p className="text-center text-2xl flex items-center justify-center">{
               currentLesson[currentIndex].wk_readings_kun?.length === 0 
                 ? <p className="text-lg text-gray-500">none</p>
-                : currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')
+                : currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/[!.]/g, "")).join(' | ')
                 
             }</p> 
             
@@ -127,6 +132,13 @@ const Lesson = () => {
           }
         </div>
       </div>
+
+      <button 
+      disabled = {!currentLesson || currentIndex !== currentLesson.length - 1}
+      onClick={handlePractice}
+      className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
+        Practice
+      </button>
 
       {popup &&
         <Popup>
