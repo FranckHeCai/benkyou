@@ -1,15 +1,16 @@
 import BackButton from "@components/BackButton"
 import KanjiCircle from "@components/KanjiCircle"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { selectLessons, selectLevel } from "services/selectLesson"
 import { useKanjiStore } from "store/store"
-import { type CompleteKanji, type KanjiLesson } from "types"
+import { type CompleteKanji, type KanjiLesson, type KanjiPracticeArray } from "types"
 
 const Kanjis = () => {
   const navigate = useNavigate()
+  const [lessonRange, setLessonRange] = useState("0-0")
   const { kanji } = useParams()
-  const { kanjiLessons, setKanjiLessons, setKanjiLevel } = useKanjiStore(state => state)
+  const { kanjiLessons, setKanjiLessons, setKanjiLevel, setKanjiPracticeArray } = useKanjiStore(state => state)
   const handleLesson = (lesson:number) =>{
     navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
     window.scrollTo({top: 0})
@@ -24,10 +25,47 @@ const Kanjis = () => {
     }
   },[kanji])
 
+  useEffect(()=>{
+    if (!kanjiLessons || !lessonRange) return;
+    const [from, to] = lessonRange.split("-").map(Number);
+    if (isNaN(from) || isNaN(to)) return;
+    const kanjiRange = kanjiLessons.slice(from, to + 1);
+    const kanjiArray = kanjiRange.flat();
+    setKanjiPracticeArray(kanjiArray);
+      
+  },[lessonRange, kanjiLessons])
+
   return (
     <div className="">
       <BackButton route="/" />
       <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-10 mt-4 sm:mt-0">JLPT {kanji}</h1>
+      {/* Practice Lessons Select */}
+      { kanjiLessons &&
+        <div>
+          <label htmlFor="lesson-range">Practice Lessons</label>
+          <select name="lesson-range" id="lesson-range"
+            className=""
+            onChange={(e)=>{
+              const [from, to] = e.target.value.split("-")
+              setLessonRange(`${from}-${to}`)
+            }}
+          >
+            <option value="" disabled>Select lesson range</option>
+            {
+              Array.from({length: Math.ceil(kanjiLessons.length / 4)}).map((_, index) => {
+                const from = index * 4
+                const to = Math.min((index + 1) * 4 - 1, kanjiLessons.length - 1)
+                return (
+                  <option key={index}  value={`${from}-${to}`}>
+                    lesson {from + 1} to lesson {to + 1}
+                  </option>
+                )
+              })
+            }
+          </select>
+        </div>
+      }
+      {/* Lessons Grid */}
       <div className="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-5">
         { kanjiLessons &&
           kanjiLessons.map((lesson:KanjiLesson, index) => {

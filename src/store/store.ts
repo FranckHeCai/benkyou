@@ -38,6 +38,10 @@ export const useKanjiStore = create<KanjiState>()(persist((set) => ({
 }),
  {
         name: 'Kanji store', 
-        partialize: (state) => ({ kanjiLessons: state.kanjiLessons, currentLesson: state.currentLesson }),
+        partialize: (state) => ({ 
+          kanjiLessons: state.kanjiLessons, 
+          currentLesson: state.currentLesson,
+          kanjiPracticeArray: state.kanjiPracticeArray
+        }),
 }
 ))
