@@ -16,7 +16,7 @@ const Kana = () => {
   return (
     <div>
       <BackButton route="/" />
-      <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-10 mt-4 sm:mt-0">{kana} Practice</h1>
+      <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-8 mt-2.5">{kana} Practice</h1>
       <div className="grid grid-cols-5">
         { kanaArray.length > 0 &&
           kanaArray.map(kana => {
