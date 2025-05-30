@@ -8,12 +8,19 @@ export type Word = {
   level: Level
 }
 
+export interface Kana {
+  char_id:      string;
+  character:    string;
+  romanization: string;
+}
+
 export type QuestionType = "onyomi" | "kunyomi" | "meaning" | ""
 
 export type KanjiCircleProps = {
   children: React.ReactNode 
   size: string
   text: string
+  color: string
 }
 
 export type KanjiPracticeArray = CompleteKanji[]

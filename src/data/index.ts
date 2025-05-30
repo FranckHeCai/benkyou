@@ -4,7 +4,9 @@ import _n3 from './n3.json'
 import _n4 from './n4.json'
 import _n5 from './n5.json'
 import kanjis from './kanji.json'
-import { type CompleteKanji, type Level } from '../types'
+import _hiragana from './hiragana.json'
+import _katanana from './katakana.json'
+import { type CompleteKanji, type Level, type Kana } from '../types'
 
 const lessonSize = 4
 
@@ -23,6 +25,8 @@ const divideKanjis = (kanjis:CompleteKanji[], size:number) =>{
   )
 }
 
+export const hiragana = _hiragana as Kana[]
+export const katana = _katanana as Kana[]
 export const n1 = filterKanji(1) as CompleteKanji[]
 export const n2 = filterKanji(2) as CompleteKanji[]
 export const n3 = filterKanji(3) as CompleteKanji[]
