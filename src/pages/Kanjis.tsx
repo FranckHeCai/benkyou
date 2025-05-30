@@ -4,6 +4,7 @@ import DownArrow from "@icons/DownArrow"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { selectLessons, selectLevel } from "services/selectLesson"
+import { shuffleKanjis } from "services/shuffle"
 import { useKanjiStore } from "store/store"
 import { type CompleteKanji, type KanjiLesson, type KanjiPracticeArray } from "types"
 
@@ -11,7 +12,7 @@ const Kanjis = () => {
   const navigate = useNavigate()
   const [lessonRange, setLessonRange] = useState("0-3")
   const { kanji } = useParams()
-  const { kanjiLessons, setKanjiLessons, setKanjiLevel, setKanjiPracticeArray } = useKanjiStore(state => state)
+  const { kanjiLessons, setKanjiLessons, setKanjiLevel, kanjiPracticeArray, setKanjiPracticeArray } = useKanjiStore(state => state)
   const handleLesson = (lesson:number) =>{
     navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
     window.scrollTo({top: 0})
@@ -37,6 +38,7 @@ const Kanjis = () => {
   },[lessonRange, kanjiLessons])
 
   const handlePractice = () => {
+    setKanjiPracticeArray(shuffleKanjis(kanjiPracticeArray))
     navigate(`/kanjis/jlpt/${kanji}/practice`)
     window.scrollTo({top:0, behavior: "smooth"})
   }
