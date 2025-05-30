@@ -54,7 +54,7 @@ const Kanjis = () => {
           {/* Dropdown */}
           <div className="relative">
             <select name="lesson-range" id="lesson-range"
-              className="custom-scrollbar w-full sm:w-60 appearance-none border-2 border-slate-800 rounded bg-slate-800 text-white px-2 py-1"
+              className=" text-sm sm:text-base custom-scrollbar w-full sm:w-60 appearance-none border-2 border-slate-800 rounded bg-slate-800 text-white px-2 py-1"
               onChange={(e)=>{
                 const [from, to] = e.target.value.split("-")
                 setLessonRange(`${from}-${to}`)
@@ -73,13 +73,13 @@ const Kanjis = () => {
                 })
               }
             </select>
-            <span className="text-slate-50 absolute right-2 top-1.5">
+            <span className="text-slate-50 absolute right-2 top-1 sm:top-1.5">
               <DownArrow />
             </span>
           </div>
           
           {/* Practice Button */}
-          <button onClick={handlePractice} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
+          <button onClick={handlePractice} className="text-sm sm:text-base px-4 py-2 bg-slate-800 text-white rounded">
             Practice
           </button>
         </div>
