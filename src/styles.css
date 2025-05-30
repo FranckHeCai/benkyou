@@ -11,6 +11,16 @@ body{
   margin: 0; 
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #768dac;
+  /* slate-800 */
+  border-radius: 4px;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

@@ -1,5 +1,6 @@
 import BackButton from "@components/BackButton"
 import KanjiCircle from "@components/KanjiCircle"
+import DownArrow from "@icons/DownArrow"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { selectLessons, selectLevel } from "services/selectLesson"
@@ -41,28 +42,33 @@ const Kanjis = () => {
       <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-10 mt-4 sm:mt-0">JLPT {kanji}</h1>
       {/* Practice Lessons Select */}
       { kanjiLessons &&
-        <div>
-          <label htmlFor="lesson-range">Practice Lessons</label>
-          <select name="lesson-range" id="lesson-range"
-            className=""
-            onChange={(e)=>{
-              const [from, to] = e.target.value.split("-")
-              setLessonRange(`${from}-${to}`)
-            }}
-          >
-            <option value="" disabled>Select lesson range</option>
-            {
-              Array.from({length: Math.ceil(kanjiLessons.length / 4)}).map((_, index) => {
-                const from = index * 4
-                const to = Math.min((index + 1) * 4 - 1, kanjiLessons.length - 1)
-                return (
-                  <option key={index}  value={`${from}-${to}`}>
-                    lesson {from + 1} to lesson {to + 1}
-                  </option>
-                )
-              })
-            }
-          </select>
+        <div className="sm:pl-6 mb-4 sm:6 flex flex-col sm:flex-row gap-1 sm:items-center sm:gap-3">
+          <label className="text-sm sm:text-lg font-medium" htmlFor="lesson-range">Practice Lessons</label>
+          <div className="relative">
+            <select name="lesson-range" id="lesson-range"
+              className="custom-scrollbar w-full sm:w-60 appearance-none border-2 border-slate-800 rounded bg-slate-800 text-white px-2 py-1"
+              onChange={(e)=>{
+                const [from, to] = e.target.value.split("-")
+                setLessonRange(`${from}-${to}`)
+              }}
+            >
+              <option className="disabled:text-slate-400" value="" disabled>Select lesson range</option>
+              {
+                Array.from({length: Math.ceil(kanjiLessons.length / 4)}).map((_, index) => {
+                  const from = index * 4
+                  const to = Math.min((index + 1) * 4 - 1, kanjiLessons.length - 1)
+                  return (
+                    <option key={index}  value={`${from}-${to}`}>
+                      lesson {from + 1} to lesson {to + 1}
+                    </option>
+                  )
+                })
+              }
+            </select>
+            <span className="text-slate-50 absolute right-2 top-1.5">
+              <DownArrow />
+            </span>
+          </div>
         </div>
       }
       {/* Lessons Grid */}
