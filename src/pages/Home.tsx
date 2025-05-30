@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { n1, n2, n3, n4, n5, hiragana, katana } from "@data/index"
+import { n1, n2, n3, n4, n5, hiragana, katakana } from "@data/index"
 import type { Level } from "types"
 import KanjiCircle from "@components/KanjiCircle"
 import Header from "@components/Header"
@@ -56,7 +56,7 @@ const Home = () => {
             </button>
             <button className="flex flex-col items-center">
               <KanjiCircle text={"text-3xl sm:text-6xl md:text-7xl"} size="w-30 h-30 sm:w-35 sm:h-35 md:w-40 md:h-40" color="bg-amber-800">
-                <p>{katana[0].character}</p>
+                <p>{katakana[0].character}</p>
               </KanjiCircle>
               <p className="text-xl sm:text-3xl font-bold text-amber-800 mt-3">Katakana</p>
             </button>

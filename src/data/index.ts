@@ -26,7 +26,7 @@ const divideKanjis = (kanjis:CompleteKanji[], size:number) =>{
 }
 
 export const hiragana = _hiragana as Kana[]
-export const katana = _katanana as Kana[]
+export const katakana = _katanana as Kana[]
 export const n1 = filterKanji(1) as CompleteKanji[]
 export const n2 = filterKanji(2) as CompleteKanji[]
 export const n3 = filterKanji(3) as CompleteKanji[]
