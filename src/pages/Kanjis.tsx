@@ -9,7 +9,7 @@ import { type CompleteKanji, type KanjiLesson, type KanjiPracticeArray } from "t
 
 const Kanjis = () => {
   const navigate = useNavigate()
-  const [lessonRange, setLessonRange] = useState("0-0")
+  const [lessonRange, setLessonRange] = useState("0-3")
   const { kanji } = useParams()
   const { kanjiLessons, setKanjiLessons, setKanjiLevel, setKanjiPracticeArray } = useKanjiStore(state => state)
   const handleLesson = (lesson:number) =>{
@@ -36,6 +36,11 @@ const Kanjis = () => {
       
   },[lessonRange, kanjiLessons])
 
+  const handlePractice = () => {
+    navigate(`/kanjis/jlpt/${kanji}/practice`)
+    window.scrollTo({top:0, behavior: "smooth"})
+  }
+
   return (
     <div className="">
       <BackButton route="/" />
@@ -44,6 +49,7 @@ const Kanjis = () => {
       { kanjiLessons &&
         <div className="sm:pl-6 mb-4 sm:6 flex flex-col sm:flex-row gap-1 sm:items-center sm:gap-3">
           <label className="text-sm sm:text-lg font-medium" htmlFor="lesson-range">Practice Lessons</label>
+          {/* Dropdown */}
           <div className="relative">
             <select name="lesson-range" id="lesson-range"
               className="custom-scrollbar w-full sm:w-60 appearance-none border-2 border-slate-800 rounded bg-slate-800 text-white px-2 py-1"
@@ -69,6 +75,11 @@ const Kanjis = () => {
               <DownArrow />
             </span>
           </div>
+          
+          {/* Practice Button */}
+          <button onClick={handlePractice} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
+            Practice
+          </button>
         </div>
       }
       {/* Lessons Grid */}

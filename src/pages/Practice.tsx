@@ -5,7 +5,7 @@ import { useKanjiStore } from "store/store";
 import type { CompleteKanji, KanjiLesson, QuestionType } from "types";
 const Practice = () => {
   const {kanjiLessons, setCurrentLesson, currentLesson, kanjiPracticeArray, setKanjiPracticeArray } = useKanjiStore(state => state)
-  const {kanji, lesson} = useParams()
+  const {kanji} = useParams()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [currentAnswerIndex, setCurrentAnswerIndex] = useState<null | number>(null)
   const [currentAnswer, setCurrentAnswer] = useState<null | CompleteKanji>(null)
@@ -22,7 +22,7 @@ const Practice = () => {
     // if(kanjiLessons){
     //   setCurrentLesson(kanjiLessons[kanjiLesson])
     // }
-  },[lesson, kanjiLessons])
+  },[kanjiLessons])
 
   useEffect(()=>{
     if(kanjiPracticeArray.length === 0) return
@@ -89,13 +89,13 @@ const Practice = () => {
   }
 
   const handleFinishPractice = () =>{
-    navigate(`/kanjis/jlpt/${kanji}/lesson/${lesson}`)
+    navigate(`/kanjis/jlpt/${kanji}`)
   }
 
   return (
     <div className="flex flex-col items-center gap-4">
       <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">Kanji Practice</h1>
-      <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Lesson {Number(lesson) + 1}</h2>
+      <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Kanji practice</h2>
       { kanjiPracticeArray.length > 0 && 
         <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
         <div className="text-7xl">{kanjiPracticeArray[currentIndex].kanji}</div>

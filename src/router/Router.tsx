@@ -10,7 +10,7 @@ const Router = () => (
       <Route index element={<Home />} />
       <Route path="/kanjis/jlpt/:kanji" element={<Kanjis />} />
       <Route path="/kanjis/jlpt/:kanji/lesson/:lesson" element={<Lesson />} />
-      <Route path="/kanjis/jlpt/:kanji/practice/:lesson" element={<Practice />} />
+      <Route path="/kanjis/jlpt/:kanji/practice" element={<Practice />} />
       <Route path="*" element={<div>404</div>} />
     </Routes>
 </BrowserRouter>
