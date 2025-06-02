@@ -6,6 +6,8 @@ import _n5 from './n5.json'
 import kanjis from './kanji.json'
 import _hiragana from './hiragana.json'
 import _katanana from './katakana.json'
+import _hiraganaF from './hiraganaFormated.json'
+import _katakanaF from './katakanaFormated.json'
 import { type CompleteKanji, type Level, type Kana } from '../types'
 
 const lessonSize = 4
@@ -25,6 +27,8 @@ const divideKanjis = (kanjis:CompleteKanji[], size:number) =>{
   )
 }
 
+export const hiraganaFormated = _hiraganaF as Kana[][]
+export const katakanaFormated = _katakanaF as Kana[][]
 export const hiragana = _hiragana as Kana[]
 export const katakana = _katanana as Kana[]
 export const n1 = filterKanji(1) as CompleteKanji[]

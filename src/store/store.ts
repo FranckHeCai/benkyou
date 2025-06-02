@@ -8,8 +8,8 @@ interface KanjiState {
   setCurrentKanji: (currentKanji: CompleteKanji | null) => void
   showKanji: boolean
   setShowKanji: (showKanji: boolean) => void
-  kanaArray : Kana[],
-  setKanaArray : (kanaArray:Kana[]) => void
+  kanaArray : Kana[][],
+  setKanaArray : (kanaArray:Kana[][]) => void
   kanjiPracticeArray: KanjiPracticeArray
   setKanjiPracticeArray: (kanjiPracticeArray: KanjiPracticeArray) => void
   kanjiLevel: KanjiLevel

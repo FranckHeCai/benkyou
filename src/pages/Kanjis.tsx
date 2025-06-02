@@ -44,7 +44,7 @@ const Kanjis = () => {
   }
 
   return (
-    <div className="">
+    <div className="text-slate-800">
       <BackButton route="/" />
       <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-10 mt-4 sm:mt-0">JLPT {kanji}</h1>
       {/* Practice Lessons Select */}
