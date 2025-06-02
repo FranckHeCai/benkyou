@@ -15,7 +15,7 @@ export interface Kana {
   romanization: string;
 }
 
-export type QuestionType = "onyomi" | "kunyomi" | "meaning" | ""
+export type QuestionType = "onyomi" | "kunyomi" | "meaning" | "character" | "romanization" | ""
 
 export type KanjiCircleProps = {
   children: React.ReactNode 

@@ -1,4 +1,4 @@
-import type { CompleteKanji } from "types"
+import type { CompleteKanji, Kana } from "types"
 export const shuffleKanjis = (array:CompleteKanji[]) =>{
     const finalArray = [...array].sort(()=> Math.random() - 0.5 )
     return finalArray
@@ -10,5 +10,10 @@ export const shuffleAnswers = (array:CompleteKanji[]) =>{
     return array[randomIndex]
   })
   const finalArray = [...array, ...newArray].sort(()=> Math.random() - 0.5 )
+  return finalArray
+}
+
+export const shuffleKanas = (array :Kana[]) =>{
+  const finalArray = [...array].sort(()=> Math.random() - 0.5 )
   return finalArray
 }
