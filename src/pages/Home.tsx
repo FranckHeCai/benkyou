@@ -18,7 +18,7 @@ const Home = () => {
   }
 
   return (
-    <div className="text-slate-800 flex flex-col">
+    <div className="text-slate-800 flex flex-col p-3 sm:p-4">
       <Header />
       <div className="grid md:grid-cols-2 gap-3 mt-4">
         <div>

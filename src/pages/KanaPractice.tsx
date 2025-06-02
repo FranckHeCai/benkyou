@@ -71,14 +71,13 @@ const KanaPractice = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">Kanji Practice</h1>
-      <h2 className="text-lg sm:text-2xl font-medium text-slate-600">{kana} practice</h2>
+    <div className="h-screen flex flex-col justify-center items-center gap-4">
+      <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">{kana} practice</h1>
       { kanas.length > 0 && 
         <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
         <div className="text-7xl">
           { questionType === "character"
-              ? "?????"
+              ? "???"
               : kanas[currentIndex].character
           }
         </div>
@@ -96,7 +95,7 @@ const KanaPractice = () => {
       }
 
       <p>Select the correct answer</p>
-      <div className="w-full sm:w-fit grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
+      <div className="w-full sm:w-fit grid grid-cols-4 gap-2">
         {answers.length > 0 &&
           answers.map((kana, index) => {
 
@@ -115,7 +114,7 @@ const KanaPractice = () => {
                     } 
                     p-5  rounded-lg shadow-md`
                   }>
-                  <p className="text-base sm:text-lg ">
+                  <p className="text-3xl ">
                     { questionType === "character"
                         ? kana.character
                         : kana.romanization
