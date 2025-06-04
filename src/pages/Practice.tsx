@@ -13,7 +13,7 @@ const Practice = () => {
   const [answers, setAnswers] = useState<CompleteKanji[]>([])
   const [checked, setChecked] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
-  const questionTypes:QuestionType[] = ["onyomi", "kunyomi" , "meaning"]
+  const questionTypes:QuestionType[] = ["onyomi", "kunyomi" , "meaning", "kanji"]
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Practice = () => {
   }, [currentIndex, kanjiPracticeArray])
 
   useEffect(()=>{
-    const questionIndex = Math.floor(Math.random() * 3)
+    const questionIndex = Math.floor(Math.random() * 4)
     setQuestionType(questionTypes[questionIndex])
     setCurrentAnswerIndex(null)
     setChecked(false)
@@ -72,6 +72,10 @@ const Practice = () => {
           currentKanji.meanings.includes(meaning)
         );
         break;
+        case "kanji":
+        isCorrect = selectedKanji.kanji === currentKanji.kanji;
+        break;
+
       default:
         break;
     }
@@ -98,7 +102,11 @@ const Practice = () => {
       <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Kanji practice</h2>
       { kanjiPracticeArray.length > 0 && 
         <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
-        <div className="text-7xl">{kanjiPracticeArray[currentIndex].kanji}</div>
+        <div className="text-7xl">{
+          questionType === "kanji" && !checked
+            ? "????"
+            : kanjiPracticeArray[currentIndex].kanji
+        }</div>
         <div className="text-center">
           <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
             <h2 className="font-semibold">Onyomi:</h2>
@@ -159,7 +167,9 @@ const Practice = () => {
                           :  kanji.wk_readings_kun?.map(word => word.replace(/^!/, "")).join(' | ')
                         : questionType === "onyomi"
                           ? kanji.wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')
-                          : kanji.meanings.map(word => word.replace(/^!/, "")).join(" | ")
+                          : questionType === "kanji"
+                            ? kanji.kanji
+                            : kanji.meanings.map(word => word.replace(/^!/, "")).join(" | ")
                     }
                   </p>
                 </button>
