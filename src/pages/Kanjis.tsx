@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { selectLessons, selectLevel } from "services/selectLesson"
 import { shuffleKanjis } from "services/shuffle"
 import { useKanjiStore } from "store/store"
-import { type CompleteKanji, type KanjiLesson, type KanjiPracticeArray } from "types"
+import { type CompleteKanji, type KanjiLesson  } from "types"
 
 const Kanjis = () => {
   const navigate = useNavigate()

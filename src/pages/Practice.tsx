@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { shuffleKanjis } from "services/shuffle";
 import { useKanjiStore } from "store/store";
-import type { CompleteKanji, KanjiLesson, QuestionType } from "types";
+import type { CompleteKanji, QuestionType } from "types";
 const Practice = () => {
-  const {kanjiLessons, setCurrentLesson, currentLesson, kanjiPracticeArray, setKanjiPracticeArray } = useKanjiStore(state => state)
+  const {kanjiLessons, currentLesson, kanjiPracticeArray } = useKanjiStore(state => state)
   const {kanji} = useParams()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [currentAnswerIndex, setCurrentAnswerIndex] = useState<null | number>(null)
@@ -26,7 +26,7 @@ const Practice = () => {
 
   useEffect(()=>{
     if(kanjiPracticeArray.length === 0) return
-    const filteredKanjis = kanjiPracticeArray.filter((answer, index) => answer.kanji !== kanjiPracticeArray[currentIndex].kanji )
+    const filteredKanjis = kanjiPracticeArray.filter((answer) => answer.kanji !== kanjiPracticeArray[currentIndex].kanji )
     const uniqueKanjis = Array.from(
       new Map(filteredKanjis.map(k => [k.kanji, k])).values()
     );
@@ -178,12 +178,16 @@ const Practice = () => {
         )
         }
       </div>
-      <button disabled={currentAnswerIndex === null} onClick={()=>{
-        checked && currentLesson
-        ? currentIndex === kanjiPracticeArray.length - 1
-          ? handleFinishPractice()
-          : handleNextKanji()
-        : handleCheckAnswer()
+      <button disabled={currentAnswerIndex === null} onClick={() => {
+        if (checked && currentLesson) {
+          if (currentIndex === kanjiPracticeArray.length - 1) {
+            handleFinishPractice();
+          } else {
+            handleNextKanji();
+          }
+        } else {
+          handleCheckAnswer();
+        }
       }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
         { checked && currentLesson
             ? currentIndex === kanjiPracticeArray.length - 1

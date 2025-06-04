@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { hiragana, katakana, hiraganaFormated, katakanaFormated } from "@data/index";
+import {hiraganaFormated, katakanaFormated } from "@data/index";
 import { useKanjiStore } from "store/store";
 import BackButton from "@components/BackButton";
 import Button from "@components/Button";

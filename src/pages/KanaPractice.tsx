@@ -28,7 +28,7 @@ const KanaPractice = () => {
 
   useEffect(()=>{
     if(kanas.length === 0) return
-    const filteredKanjis = kanas.filter((answer, index) => answer.char_id !== kanas[currentIndex].char_id )
+    const filteredKanjis = kanas.filter((answer) => answer.char_id !== kanas[currentIndex].char_id )
     const reducedKanas = filteredKanjis.slice(0,3)
     const shuffledAnswers = shuffleKanas([kanas[currentIndex], ...reducedKanas])
     setAnswers(shuffledAnswers)
@@ -52,7 +52,7 @@ const KanaPractice = () => {
     const currentKana = kanas[currentIndex];
     const selectedKana = currentAnswer;
 
-    let isCorrect = currentKana.char_id === selectedKana.char_id;
+    const isCorrect = currentKana.char_id === selectedKana.char_id;
 
     setIsCorrect(isCorrect);
     setChecked(true);
@@ -126,12 +126,16 @@ const KanaPractice = () => {
         )
         }
       </div>
-      <button disabled={currentAnswerIndex === null} onClick={()=>{
-        checked
-        ? currentIndex === kanas.length - 1
-          ? handleFinishPractice()
-          : handleNextKana()
-        : handleCheckAnswer()
+      <button disabled={currentAnswerIndex === null} onClick={() => {
+        if (checked) {
+          if (currentIndex === kanas.length - 1) {
+            handleFinishPractice();
+          } else {
+            handleNextKana();
+          }
+        } else {
+          handleCheckAnswer();
+        }
       }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
         { checked
             ? currentIndex === kanas.length - 1
