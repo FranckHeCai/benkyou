@@ -20,7 +20,7 @@ const Kana = () => {
 
   return (
     <div className="kana">
-      <BackButton route="/" />
+      <BackButton/>
       <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl mb-4 sm:mb-8 mt-2.5">{kana}</h1>
       <div className="flex justify-center">
         <Button handleFunction={handlePractice}>

@@ -99,7 +99,7 @@ const Practice = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 p-3 sm:p-4">
-      <BackButton route="/" />
+      <BackButton/>
       <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">Kanji Practice</h1>
       <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Kanji practice</h2>
       { kanjiPracticeArray.length > 0 && 

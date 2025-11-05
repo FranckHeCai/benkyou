@@ -1,11 +1,12 @@
 import BackIcon from '@icons/BackIcon';
 import { useNavigate } from 'react-router-dom';
 
-const BackButton = ({ route }: { route: string }) => {
+const BackButton = ({ route }: { route?: string }) => {
     const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate(route);
+        const nav = route || -1;
+        navigate(nav);
         window.scrollTo({ top: 0 });
     };
     return (
