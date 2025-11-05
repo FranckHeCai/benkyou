@@ -78,7 +78,7 @@ const Lesson = () => {
 
   return (
     <div className=" flex flex-col items-center gap-4 p-3 sm:p-4">
-      <BackButton route={`/kanjis/jlpt/${kanji}`} />
+      <BackButton/>
       <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl">JLPT {kanji}</h1>
       <div className="w-full max-w-xl flex justify-between items-center text-slate-800 text-sm sm:text-base font-medium">
         <button

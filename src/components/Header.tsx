@@ -21,7 +21,7 @@ const Header = () => {
             <h2 className="hidden sm:block text-slate-500 text-sm sm:text-lg">Your Pathway to Kanji Mastery.</h2>
           </div>
         </button>
-      {location.pathname !== "/" && <BackButton route={backRoute} />}
+      {location.pathname !== "/" && <BackButton/>}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { shuffleKanas } from "services/shuffle";
 import { useKanjiStore } from "store/store";
+import BackButton from "@components/BackButton"
 import type { Kana, QuestionType } from "types";
 const KanaPractice = () => {
   const {kanaArray } = useKanjiStore(state => state)
@@ -72,6 +73,7 @@ const KanaPractice = () => {
 
   return (
     <div className="h-screen flex flex-col justify-center items-center gap-4">
+    <BackButton/>
       <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">{kana} practice</h1>
       { kanas.length > 0 && 
         <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-4 flex flex-col justify-center items-center gap-4 ">
