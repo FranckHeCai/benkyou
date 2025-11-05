@@ -54,13 +54,13 @@ const Kanjis = () => {
           {/* Dropdown */}
           <div className="relative">
             <select name="lesson-range" id="lesson-range"
-              className=" text-sm sm:text-base custom-scrollbar w-full sm:w-60 appearance-none border-2 border-slate-800 rounded bg-slate-800 text-white px-2 py-1"
+              className=" text-sm sm:text-base custom-scrollbar w-full sm:w-60 appearance-none border-2 border-slate-800 rounded bg-slate-800 text-white px-2 py-1 cursor-pointer"
               onChange={(e)=>{
                 const [from, to] = e.target.value.split("-")
                 setLessonRange(`${from}-${to}`)
               }}
             >
-              <option className="disabled:text-slate-400" value="" disabled>Select lesson range</option>
+              <option className="disabled:text-slate-400 " value="" disabled>Select lesson range</option>
               {
                 Array.from({length: Math.ceil(kanjiLessons.length / 4)}).map((_, index) => {
                   const from = index * 4
@@ -73,13 +73,13 @@ const Kanjis = () => {
                 })
               }
             </select>
-            <span className="text-slate-50 absolute right-2 top-1 sm:top-1.5">
+            <span className="text-slate-50 absolute right-2 top-1 sm:top-1.5 pointer-events-none">
               <DownArrow />
             </span>
           </div>
           
           {/* Practice Button */}
-          <button onClick={handlePractice} className="text-sm sm:text-base px-4 py-2 bg-slate-800 text-white rounded">
+          <button onClick={handlePractice} className="text-sm sm:text-base px-4 py-2 bg-slate-800 text-white rounded cursor-pointer">
             Practice
           </button>
         </div>
@@ -89,7 +89,7 @@ const Kanjis = () => {
         { kanjiLessons &&
           kanjiLessons.map((lesson:KanjiLesson, index) => {
             return (
-              <button onClick={()=>{handleLesson(index)}} key={`n5 lesson ${index+1}`} className="w-full flex items-center sm:flex-col gap-4">
+              <button onClick={()=>{handleLesson(index)}} key={`n5 lesson ${index+1}`} className="w-full flex items-center sm:flex-col gap-4 cursor-pointer">
                 <KanjiCircle size={"w-20 h-20 sm:w-30 sm:h-30"} text={"text-xl sm:text-3xl"} color="bg-slate-800">
                 {lesson && lesson[0].kanji}
                 </KanjiCircle>

@@ -82,7 +82,7 @@ const Lesson = () => {
       <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl">JLPT {kanji}</h1>
       <div className="w-full max-w-xl flex justify-between items-center text-slate-800 text-sm sm:text-base font-medium">
         <button
-          className=" text-xs sm:text-base bg-gray-200 rounded flex items-center gap-1 sm:gap-2 disabled:opacity-50"
+          className=" text-xs sm:text-base bg-gray-200 rounded flex items-center gap-1 sm:gap-2 disabled:opacity-50 enabled:cursor-pointer"
           onClick={handlePrevLesson}
           disabled={Number(lesson) === 0}
         >
@@ -91,8 +91,9 @@ const Lesson = () => {
         </button>
         <h2 className="font-bold">Lesson {lesson ? Number(lesson) + 1 : ""}</h2>
         <button
-          className="text-xs sm:text-base bg-gray-200 rounded gap-1 sm:gap-2 flex items-center"
+          className="text-xs sm:text-base bg-gray-200 rounded gap-1 sm:gap-2 flex items-center disabled:opacity-50 enabled:cursor-pointer"
           onClick={handleNextLesson}
+          disabled={!kanjiLessons || kanjiLessons?.length - 1 === Number(lesson)}
         >
           <div className="hidden sm:block">Next lesson</div>
           <RightArrow />
@@ -125,14 +126,14 @@ const Lesson = () => {
 
       <div className="flex gap-4">
         <button
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 enabled:cursor-pointer"
           onClick={handlePrev}
           disabled={currentIndex === 0}
         >
           Previous
         </button>
         <button
-          className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50"
+          className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50 enabled:cursor-pointer"
           onClick={handleNext}
           disabled={!currentLesson || currentIndex === currentLesson.length - 1}
         >
@@ -146,7 +147,7 @@ const Lesson = () => {
           { currentLesson &&
             currentLesson.map((kanji, index) =>{
               return(
-                <button key={kanji.kanji} onClick={()=>{selectKanji(index)}} className={`${index === currentIndex ? "border-2 border-slate-800" : ""} p-5 bg-white rounded-lg shadow-md`}>
+                <button key={kanji.kanji} onClick={()=>{selectKanji(index)}} className={`${index === currentIndex ? "border-2 border-slate-800" : ""} p-5 bg-white rounded-lg shadow-md cursor-pointer`}>
                   <p className="text-xl sm:text-5xl ">{kanji.kanji}</p>
                 </button>
               )
@@ -158,7 +159,7 @@ const Lesson = () => {
       <button 
       // disabled = {!currentLesson || currentIndex !== currentLesson.length - 1}
       onClick={handlePractice}
-      className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
+      className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50 cursor-pointer">
         Practice Lesson
       </button>
 

@@ -158,7 +158,7 @@ const Practice = () => {
                       ? "bg-slate-800 text-white" 
                       : "bg-white disabled:opacity-50"
                     } 
-                    p-5  rounded-lg shadow-md`
+                    p-5  rounded-lg shadow-md cursor-pointer`
                   }>
                   <p className="text-base sm:text-lg ">
                     { questionType === "kunyomi"
@@ -188,7 +188,7 @@ const Practice = () => {
         } else {
           handleCheckAnswer();
         }
-      }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
+      }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50 enabled:cursor-pointer">
         { checked && currentLesson
             ? currentIndex === kanjiPracticeArray.length - 1
               ? "End practice"

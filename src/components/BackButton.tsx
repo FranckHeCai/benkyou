@@ -9,7 +9,7 @@ const BackButton = ({ route }: { route: string }) => {
         window.scrollTo({ top: 0 });
     };
     return (
-        <button onClick={handleBack} className="absolute top-4 left-7 sm:left-10">
+        <button onClick={handleBack} className="absolute top-4 left-7 sm:left-10 cursor-pointer">
             <BackIcon />
         </button>
     );

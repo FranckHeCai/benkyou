@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <div className="flex justify-center p-3">
-        <button onClick={()=>{navigate("/")}} className="flex items-center text-left gap-2">
+        <button onClick={()=>{navigate("/")}} className="flex items-center text-left gap-2 cursor-pointer">
           <img className="w-15 h-15 sm:w-25 sm:h-25" src="/logo.png" alt="benkyou logo" />
           <div>
             <h1 className='hidden sm:block sm:text-4xl font-bold text-slate-800 mb-1'>Benkyou</h1>

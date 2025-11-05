@@ -38,7 +38,7 @@ const Home = () => {
                       const kanjiIndex = Math.floor(Math.random() * kanjiList.length+1)
                       const firstKanji = kanjiList[kanjiIndex]
                       return (
-                        <button className="rounded flex flex-col justify-center items-center gap-1 sm:gap-3" onClick={()=>{handleLevel(level)}} key={level}>
+                        <button className="rounded flex flex-col justify-center items-center gap-1 sm:gap-3 cursor-pointer" onClick={()=>{handleLevel(level)}} key={level}>
                             <KanjiCircle size={"w-30 h-30 sm:w-35 sm:h-35 md:w-40 md:h-40"} text={"text-4xl sm:text-5xl md:text-6xl"} color="bg-slate-800">
                                 {firstKanji?.kanji}
                             </KanjiCircle>
@@ -52,13 +52,13 @@ const Home = () => {
         <div className="flex flex-col items-center">
           <h2 className="text-base sm:text-lg font-medium text-center mb-2 sm:mb-4">Study the basics</h2>
           <div className="w-full md:w-fit grid grid-cols-2 justify-between md:gap-8 lg:gap-20">
-            <button onClick={()=>{handleKana("Hiragana")}} className="flex flex-col items-center">
+            <button onClick={()=>{handleKana("Hiragana")}} className="flex flex-col items-center cursor-pointer">
               <KanjiCircle text={"text-3xl sm:text-6xl md:text-7xl"} size="w-30 h-30 sm:w-35 sm:h-35 md:w-40 md:h-40" color="bg-amber-800">
                 <p>{hiragana[0].character}</p>
               </KanjiCircle>
               <p className="text-xl sm:text-3xl font-bold text-amber-800 mt-3">Hiragana</p>
             </button>
-            <button onClick={()=>{handleKana("Katakana")}} className="flex flex-col items-center">
+            <button onClick={()=>{handleKana("Katakana")}} className="flex flex-col items-center cursor-pointer">
               <KanjiCircle text={"text-3xl sm:text-6xl md:text-7xl"} size="w-30 h-30 sm:w-35 sm:h-35 md:w-40 md:h-40" color="bg-amber-800">
                 <p>{katakana[0].character}</p>
               </KanjiCircle>

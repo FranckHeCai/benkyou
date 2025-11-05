@@ -112,7 +112,7 @@ const KanaPractice = () => {
                       ? "bg-slate-800 text-white" 
                       : "bg-white disabled:opacity-50"
                     } 
-                    p-5  rounded-lg shadow-md`
+                    p-5  rounded-lg shadow-md cursor-pointer`
                   }>
                   <p className="text-3xl ">
                     { questionType === "character"
@@ -136,7 +136,7 @@ const KanaPractice = () => {
         } else {
           handleCheckAnswer();
         }
-      }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
+      }} className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50 enabled:cursor-pointer">
         { checked
             ? currentIndex === kanas.length - 1
               ? "End practice"
