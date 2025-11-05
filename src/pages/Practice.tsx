@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { shuffleKanjis } from "services/shuffle";
 import { useKanjiStore } from "store/store";
 import type { CompleteKanji, QuestionType } from "types";
+import BackButton from "@components/BackButton"
 const Practice = () => {
   const {kanjiLessons, currentLesson, kanjiPracticeArray } = useKanjiStore(state => state)
   const {kanji} = useParams()
@@ -98,6 +99,7 @@ const Practice = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 p-3 sm:p-4">
+      <BackButton route="/" />
       <h1 className="text-xl font-bold text-slate-800 sm:text-3xl">Kanji Practice</h1>
       <h2 className="text-lg sm:text-2xl font-medium text-slate-600">JLPT {kanji} Kanji practice</h2>
       { kanjiPracticeArray.length > 0 && 
