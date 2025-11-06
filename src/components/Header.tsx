@@ -11,7 +11,7 @@ const Header = () => {
 			<button
 				type="button"
 				onClick={() => {
-					navigate(`/?t=${Date.now()}`);
+					navigate(`/`);
 				}}
 				className="flex items-center text-left gap-2 cursor-pointer"
 			>
