@@ -60,8 +60,15 @@ const Practice = () => {
 		setIsCorrect(false);
 	}, []);
 
-	const selectKanji = (index: number) => {
+	const selectKanji = (index: number, kanji: CompleteKanji) => {
+		if (index === currentAnswerIndex) {
+			setCurrentAnswerIndex(null);
+			setCurrentAnswer(null);
+			return;
+		}
+
 		setCurrentAnswerIndex(index);
+		setCurrentAnswer(kanji);
 	};
 
 	const handleCheckAnswer = () => {
@@ -173,8 +180,7 @@ const Practice = () => {
 								disabled={checked}
 								key={kanji.kanji}
 								onClick={() => {
-									selectKanji(index);
-									setCurrentAnswer(kanji);
+									selectKanji(index, kanji);
 								}}
 								className={`${
 									checked && currentAnswerIndex === index

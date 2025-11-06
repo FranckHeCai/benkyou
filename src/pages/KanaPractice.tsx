@@ -52,8 +52,14 @@ const KanaPractice = () => {
 		setIsCorrect(false);
 	}, []);
 
-	const selectKana = (index: number) => {
+	const selectKana = (index: number, kana: Kana) => {
+		if (index === currentAnswerIndex) {
+			setCurrentAnswerIndex(null);
+			setCurrentAnswer(null);
+			return;
+		}
 		setCurrentAnswerIndex(index);
+		setCurrentAnswer(kana);
 	};
 
 	const handleCheckAnswer = () => {
@@ -114,8 +120,7 @@ const KanaPractice = () => {
 								disabled={checked}
 								key={kana.char_id}
 								onClick={() => {
-									selectKana(index);
-									setCurrentAnswer(kana);
+									selectKana(index, kana);
 								}}
 								className={`${
 									checked && currentAnswerIndex === index
