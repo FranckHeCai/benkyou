@@ -1,187 +1,237 @@
-import BackButton from "@components/BackButton"
-import Popup from "@components/Popup"
-import InfoIcon from "@icons/InfoIcon"
-import LeftArrow from "@icons/LeftArrow"
-import RightArrow from "@icons/RightArrow"
-import { useCallback, useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { shuffleKanjis } from "services/shuffle"
-import { useKanjiStore } from "store/store"
+import BackButton from "@components/BackButton";
+import Popup from "@components/Popup";
+import InfoIcon from "@icons/InfoIcon";
+import LeftArrow from "@icons/LeftArrow";
+import RightArrow from "@icons/RightArrow";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { shuffleKanjis } from "services/shuffle";
+import { useKanjiStore } from "store/store";
 
 const Lesson = () => {
-  // const [currentLesson, setCurrentLesson] = useState<KanjiLesson>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const navigate = useNavigate()
-  const { kanji, lesson} = useParams()
-  const { kanjiLessons, setCurrentLesson, currentLesson, popup, setPopup, setKanjiPracticeArray } = useKanjiStore(state => state)
-  
-  useEffect(()=>{
-    setCurrentIndex(0)
-    const kanjiLesson = Number(lesson)
-    if(kanjiLessons){
-      setCurrentLesson(kanjiLessons[kanjiLesson])
-    }
-  },[lesson, kanjiLessons])
+	// const [currentLesson, setCurrentLesson] = useState<KanjiLesson>(null)
+	const [currentIndex, setCurrentIndex] = useState(0);
+	const navigate = useNavigate();
+	const { kanji, lesson } = useParams();
+	const {
+		kanjiLessons,
+		setCurrentLesson,
+		currentLesson,
+		popup,
+		setPopup,
+		setKanjiPracticeArray,
+	} = useKanjiStore((state) => state);
 
-  const handlePrev = () => setCurrentIndex((prev):number => {
-    if(prev === 0) return prev
-    window.scrollTo({ top: 0, behavior: "smooth" })
-    return prev - 1
-  })
-  const handleNext = () => setCurrentIndex((prev):number => {
-    if(!currentLesson || prev === currentLesson.length - 1) return prev
-    window.scrollTo({ top: 0, behavior: "smooth" })
-    return prev + 1
-  })
+	useEffect(() => {
+		setCurrentIndex(0);
+		const kanjiLesson = Number(lesson);
+		if (kanjiLessons) {
+			setCurrentLesson(kanjiLessons[kanjiLesson]);
+		}
+	}, [lesson, kanjiLessons, setCurrentLesson]);
 
-  const handlePrevMemo = useCallback(handlePrev, [handlePrev]);
-  const handleNextMemo = useCallback(handleNext, [handleNext]);
+	const handlePrev = () =>
+		setCurrentIndex((prev): number => {
+			if (prev === 0) return prev;
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			return prev - 1;
+		});
+	const handleNext = () =>
+		setCurrentIndex((prev): number => {
+			if (!currentLesson || prev === currentLesson.length - 1) return prev;
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			return prev + 1;
+		});
 
-  useEffect(()=>{
-    const handleKeydown = (e:KeyboardEvent) =>{
-      if(e.key === "ArrowLeft" || e.key ===  "a" || e.key === "A") handlePrevMemo()
-      if(e.key === "ArrowRight" || e.key === "d" || e.key === "D") handleNextMemo()
-    }
-    window.addEventListener("keydown", handleKeydown)
+	const handlePrevMemo = useCallback(handlePrev, []);
+	const handleNextMemo = useCallback(handleNext, []);
 
-    return () => window.removeEventListener("keydown", handleKeydown) 
-  },[handlePrevMemo, handleNextMemo])
+	useEffect(() => {
+		const handleKeydown = (e: KeyboardEvent) => {
+			if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A")
+				handlePrevMemo();
+			if (e.key === "ArrowRight" || e.key === "d" || e.key === "D")
+				handleNextMemo();
+		};
+		window.addEventListener("keydown", handleKeydown);
 
-  const handlePrevLesson = () => {
-    if(Number(lesson) === 0) return 
-    navigate(`/kanjis/jlpt/${kanji}/lesson/${Number(lesson) - 1}`)
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-  const handleNextLesson = () => {
-    if(!kanjiLessons || kanjiLessons?.length - 1 === Number(lesson)) return
-    navigate(`/kanjis/jlpt/${kanji}/lesson/${Number(lesson) + 1}`)
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+		return () => window.removeEventListener("keydown", handleKeydown);
+	}, [handlePrevMemo, handleNextMemo]);
 
-  const selectKanji = (index:number) => {
-    setCurrentIndex(index)
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+	const handlePrevLesson = () => {
+		if (Number(lesson) === 0) return;
+		navigate(`/kanjis/jlpt/${kanji}/lesson/${Number(lesson) - 1}`);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+	const handleNextLesson = () => {
+		if (!kanjiLessons || kanjiLessons?.length - 1 === Number(lesson)) return;
+		navigate(`/kanjis/jlpt/${kanji}/lesson/${Number(lesson) + 1}`);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
-  const handlePractice = () => {
-    if(currentLesson){
-      const newArray = Array.from({length: 4}, ()=>{
-        const randomIndex = Math.floor(Math.random() * currentLesson.length)
-        return currentLesson[randomIndex]
-      })
-      const shuffledKanjis = shuffleKanjis([...newArray, ...currentLesson])
-      setKanjiPracticeArray(shuffledKanjis)
-    }
-    navigate(`/kanjis/jlpt/${kanji}/practice/`)
-    window.scrollTo({top: 0, behavior: "smooth"})
-  }
+	const selectKanji = (index: number) => {
+		setCurrentIndex(index);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
-  return (
-    <div className=" flex flex-col items-center gap-4 p-3 sm:p-4">
-      <BackButton route={`/kanjis/jlpt/${kanji}`} />
-      <h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl">JLPT {kanji}</h1>
-      <div className="w-full max-w-xl flex justify-between items-center text-slate-800 text-sm sm:text-base font-medium">
-        <button
-          className=" text-xs sm:text-base bg-gray-200 rounded flex items-center gap-1 sm:gap-2 disabled:opacity-50"
-          onClick={handlePrevLesson}
-          disabled={Number(lesson) === 0}
-        >
-          <LeftArrow />
-          <p className="hidden sm:block">Previous lesson</p>
-        </button>
-        <h2 className="font-bold">Lesson {lesson ? Number(lesson) + 1 : ""}</h2>
-        <button
-          className="text-xs sm:text-base bg-gray-200 rounded gap-1 sm:gap-2 flex items-center"
-          onClick={handleNextLesson}
-        >
-          <div className="hidden sm:block">Next lesson</div>
-          <RightArrow />
-        </button>
-      </div>
-      
-      { currentLesson &&
-        <div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-6 flex flex-col justify-center items-center gap-4 ">
-        <div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
-        <div className="text-center">
-          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
-            <h2 className="font-semibold">Onyomi:</h2>
-            <p className="text-center text-2xl">{currentLesson[currentIndex].wk_readings_on?.map(word => word.replace(/^!/, "")).join(' | ')}</p>
-          </div>
-          <div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center">
-            <h2 className="font-semibold">Kunyomi:</h2>
-            <p className="text-center text-2xl flex items-center justify-center">{
-              currentLesson[currentIndex].wk_readings_kun?.length === 0 
-                ? <p className="text-lg text-gray-500">none</p>
-                : currentLesson[currentIndex].wk_readings_kun?.map(word => word.replace(/[!.]/g, "")).join(' | ')
-                
-            }</p> 
-            
-          </div>
-        </div>
-        <div className="text-center text-xl text-gray-500">{currentLesson[currentIndex].meanings.join(', ')}</div>
-        <button onClick={setPopup} className="absolute top-5 right-5"> <InfoIcon /> </button>
-        </div>
-      }
+	const handlePractice = () => {
+		if (currentLesson) {
+			const newArray = Array.from({ length: 4 }, () => {
+				const randomIndex = Math.floor(Math.random() * currentLesson.length);
+				return currentLesson[randomIndex];
+			});
+			const shuffledKanjis = shuffleKanjis([...newArray, ...currentLesson]);
+			setKanjiPracticeArray(shuffledKanjis);
+		}
+		navigate(`/kanjis/jlpt/${kanji}/practice/`);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
-      <div className="flex gap-4">
-        <button
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-          onClick={handlePrev}
-          disabled={currentIndex === 0}
-        >
-          Previous
-        </button>
-        <button
-          className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50"
-          onClick={handleNext}
-          disabled={!currentLesson || currentIndex === currentLesson.length - 1}
-        >
-          Next
-        </button>
-      </div>
+	return (
+		<div className=" flex flex-col items-center gap-4 p-3 sm:p-4">
+			<BackButton route={`/kanjis/jlpt/${kanji}`} />
+			<h1 className="text-center text-xl font-bold text-slate-800 sm:text-3xl">
+				JLPT {kanji}
+			</h1>
+			<div className="w-full max-w-xl flex justify-between items-center text-slate-800 text-sm sm:text-base font-medium">
+				<button
+					type="button"
+					className=" text-xs sm:text-base bg-gray-200 rounded flex items-center gap-1 sm:gap-2 disabled:opacity-50 enabled:cursor-pointer"
+					onClick={handlePrevLesson}
+					disabled={Number(lesson) === 0}
+				>
+					<LeftArrow />
+					<p className="hidden sm:block">Previous lesson</p>
+				</button>
+				<h2 className="font-bold">Lesson {lesson ? Number(lesson) + 1 : ""}</h2>
+				<button
+					type="button"
+					className="text-xs sm:text-base bg-gray-200 rounded gap-1 sm:gap-2 flex items-center disabled:opacity-50 enabled:cursor-pointer"
+					onClick={handleNextLesson}
+					disabled={
+						!kanjiLessons || kanjiLessons?.length - 1 === Number(lesson)
+					}
+				>
+					<div className="hidden sm:block">Next lesson</div>
+					<RightArrow />
+				</button>
+			</div>
 
-      <div className="w-full sm:w-fit">
-        <h3 className="text-center font-medium mb-4">Lesson Kanjis</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          { currentLesson &&
-            currentLesson.map((kanji, index) =>{
-              return(
-                <button key={kanji.kanji} onClick={()=>{selectKanji(index)}} className={`${index === currentIndex ? "border-2 border-slate-800" : ""} p-5 bg-white rounded-lg shadow-md`}>
-                  <p className="text-xl sm:text-5xl ">{kanji.kanji}</p>
-                </button>
-              )
-            })
-          }
-        </div>
-      </div>
+			{currentLesson && (
+				<div className="relative w-full sm:w-sm min-h-70 sm:h-90 bg-white rounded-lg shadow p-6 flex flex-col justify-center items-center gap-4 ">
+					<div className="text-7xl">{currentLesson[currentIndex].kanji}</div>
+					<div className="text-center">
+						<div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center mb-1">
+							<h2 className="font-semibold">Onyomi:</h2>
+							<p className="text-center text-2xl">
+								{currentLesson[currentIndex].wk_readings_on
+									?.map((word) => word.replace(/^!/, ""))
+									.join(" | ")}
+							</p>
+						</div>
+						<div className="text-lg text-gray-700 flex flex-col sm:flex-row sm:gap-2 sm:items-center">
+							<h2 className="font-semibold">Kunyomi:</h2>
+							<p className="text-center text-2xl flex items-center justify-center">
+								{currentLesson[currentIndex].wk_readings_kun?.length === 0 ? (
+									<p className="text-lg text-gray-500">none</p>
+								) : (
+									currentLesson[currentIndex].wk_readings_kun
+										?.map((word) => word.replace(/[!.]/g, ""))
+										.join(" | ")
+								)}
+							</p>
+						</div>
+					</div>
+					<div className="text-center text-xl text-gray-500">
+						{currentLesson[currentIndex].meanings.join(", ")}
+					</div>
+					<button
+						type="button"
+						onClick={setPopup}
+						className="absolute top-5 right-5"
+					>
+						{" "}
+						<InfoIcon />{" "}
+					</button>
+				</div>
+			)}
 
-      <button 
-      // disabled = {!currentLesson || currentIndex !== currentLesson.length - 1}
-      onClick={handlePractice}
-      className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50">
-        Practice Lesson
-      </button>
+			<div className="flex gap-4">
+				<button
+					type="button"
+					className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 enabled:cursor-pointer"
+					onClick={handlePrev}
+					disabled={currentIndex === 0}
+				>
+					Previous
+				</button>
+				<button
+					type="button"
+					className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50 enabled:cursor-pointer"
+					onClick={handleNext}
+					disabled={!currentLesson || currentIndex === currentLesson.length - 1}
+				>
+					Next
+				</button>
+			</div>
 
-      {popup &&
-        <Popup>
-          <div className="text-slate-800 flex flex-col gap-2 sm:gap-4">
-            <div>
-              <h2 className="text-center font-bold text-lg sm:text-xl">What is Onyomi?</h2>
-              <p className="text-sm sm:text-base">
-                Used mainly in multi‐kanji compounds (熟語), e.g. 学校 (がっこう, gakkō “school”), where both 学 (ガク gaku) and 校 (コウ kō) use on’yomi.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-center font-bold text-lg sm:text-xl">What is Kunyomi?</h2>
-              <p className="text-sm sm:text-base">
-                Used when the kanji stands alone or with okurigana (hiragana suffixes), e.g. 食べる (たべる, taberu “to eat”), where 食 is read as た (ta) + べる (beru).
-              </p>
-            </div>
-          </div>
-        </Popup>
-      }
-    </div>
-  )
-}
+			<div className="w-full sm:w-fit">
+				<h3 className="text-center font-medium mb-4">Lesson Kanjis</h3>
+				<div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+					{currentLesson?.map((kanji, index) => {
+						return (
+							<button
+								type="button"
+								key={kanji.kanji}
+								onClick={() => {
+									selectKanji(index);
+								}}
+								className={`${index === currentIndex ? "border-2 border-slate-800" : ""} p-5 bg-white rounded-lg shadow-md cursor-pointer`}
+							>
+								<p className="text-xl sm:text-5xl ">{kanji.kanji}</p>
+							</button>
+						);
+					})}
+				</div>
+			</div>
 
-export default Lesson
+			<button
+				type="button"
+				// disabled = {!currentLesson || currentIndex !== currentLesson.length - 1}
+				onClick={handlePractice}
+				className="px-4 py-2 bg-slate-800 text-white rounded disabled:opacity-50 cursor-pointer"
+			>
+				Practice Lesson
+			</button>
+
+			{popup && (
+				<Popup>
+					<div className="text-slate-800 flex flex-col gap-2 sm:gap-4">
+						<div>
+							<h2 className="text-center font-bold text-lg sm:text-xl">
+								What is Onyomi?
+							</h2>
+							<p className="text-sm sm:text-base">
+								Used mainly in multi‐kanji compounds (熟語), e.g. 学校
+								(がっこう, gakkō “school”), where both 学 (ガク gaku) and 校
+								(コウ kō) use on’yomi.
+							</p>
+						</div>
+						<div>
+							<h2 className="text-center font-bold text-lg sm:text-xl">
+								What is Kunyomi?
+							</h2>
+							<p className="text-sm sm:text-base">
+								Used when the kanji stands alone or with okurigana (hiragana
+								suffixes), e.g. 食べる (たべる, taberu “to eat”), where 食 is
+								read as た (ta) + べる (beru).
+							</p>
+						</div>
+					</div>
+				</Popup>
+			)}
+		</div>
+	);
+};
+
+export default Lesson;

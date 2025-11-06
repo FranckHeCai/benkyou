@@ -13,7 +13,7 @@ const Router = () => (
       <Route path="/kanjis/jlpt/:kanji" element={<Kanjis />} />
       <Route path="/kanjis/jlpt/:kanji/lesson/:lesson" element={<Lesson />} />
       <Route path="/kanjis/jlpt/:kanji/practice" element={<Practice />} />
-      <Route path="/kana/practice/:kana" element={<KanaPractice />} />
+            <Route path="/kana/practice/:kana" element={<KanaPractice />} />
       <Route path="/kana/:kana" element={<Kana />} />
       <Route path="*" element={<div>404</div>} />
     </Routes>
