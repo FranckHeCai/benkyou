@@ -19,7 +19,7 @@ export default function StudyButton({
 	return (
 		<button
 			type="button"
-			className="rounded flex flex-col justify-center items-center gap-1 sm:gap-3 cursor-pointer rounded-xl border-2 border-transparent hover:border-blue-500 hover:shadow-md transition-all duration-300 py-4 px-6"
+			className={`flex flex-col justify-center items-center gap-1 sm:gap-3 cursor-pointer rounded-xl border-2 border-transparent ${isBasic ? "hover:border-amber-800" : "hover:border-slate-800"} hover:shadow-md transition-all duration-300 py-4 px-6`}
 			onClick={() => {
 				handleLevel();
 			}}
