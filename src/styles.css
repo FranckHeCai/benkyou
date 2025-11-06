@@ -1,35 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #042847;
-  --primary-light: #0a4b8c;
-  --fade-in: fadeIn 0.2s ease-in
+	--primary: #042847;
+	--primary-light: #0a4b8c;
+	--fade-in: fadeIn 0.2s ease-in;
 }
 
-body{
-  font-family: "Poppins";
-  margin: 0; 
+body {
+	font-family: "Poppins", sans-serif;
+	margin: 0;
 }
 
 .kana {
-  font-family: 'Noto Sans JP', sans-serif;
+	font-family: "Noto Sans JP", sans-serif;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #768dac;
-  /* slate-800 */
-  border-radius: 4px;
+	background: #768dac;
+	/* slate-800 */
+	border-radius: 4px;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-in;
+	animation: fadeIn 0.5s ease-in;
 }

@@ -1,65 +1,72 @@
-export type Level = 1 | 2 | 3 | 4 | 5
-export type KanaType = "Hiragana" | "Katakana"
+export type Level = 1 | 2 | 3 | 4 | 5;
+export type KanaType = "Hiragana" | "Katakana";
 
 export type Word = {
-  word: string
-  meaning: string
-  furigana: string
-  romaji: string
-  level: Level
-}
+	word: string;
+	meaning: string;
+	furigana: string;
+	romaji: string;
+	level: Level;
+};
 
 export interface Kana {
-  char_id:      string;
-  character:    string;
-  romanization: string;
+	char_id: string;
+	character: string;
+	romanization: string;
 }
 
-export type QuestionType = "onyomi" | "kunyomi" | "meaning" | "character" | "romanization" | "kanji" | ""
+export type QuestionType =
+	| "onyomi"
+	| "kunyomi"
+	| "meaning"
+	| "character"
+	| "romanization"
+	| "kanji"
+	| "";
 
 export type KanjiCircleProps = {
-  children: React.ReactNode 
-  size: string
-  text: string
-  color: string
-}
+	children: React.ReactNode;
+	size: string;
+	text: string;
+	color: string;
+};
 
-export type KanjiPracticeArray = CompleteKanji[]
+export type KanjiPracticeArray = CompleteKanji[];
 
-export type KanjiLevel = CompleteKanji[]
+export type KanjiLevel = CompleteKanji[];
 
-export type KanjiLessons = CompleteKanji[][] | null
+export type KanjiLessons = CompleteKanji[][] | null;
 
-export type KanjiLesson = CompleteKanji[] | null
+export type KanjiLesson = CompleteKanji[] | null;
 
 export type Kanji = {
-  strokes:         number;
-  grade:           number | null;
-  freq:            number | null;
-  jlpt_old:        number | null;
-  jlpt_new:        number | null;
-  meanings:        string[];
-  readings_on:     string[];
-  readings_kun:    string[];
-  wk_level:        number | null;
-  wk_meanings:     string[] | null;
-  wk_readings_on:  string[] | null;
-  wk_readings_kun: string[] | null;
-  wk_radicals:     string[] | null;
-}
+	strokes: number;
+	grade: number | null;
+	freq: number | null;
+	jlpt_old: number | null;
+	jlpt_new: number | null;
+	meanings: string[];
+	readings_on: string[];
+	readings_kun: string[];
+	wk_level: number | null;
+	wk_meanings: string[] | null;
+	wk_readings_on: string[] | null;
+	wk_readings_kun: string[] | null;
+	wk_radicals: string[] | null;
+};
 
-export type CompleteKanji = { kanji: string } & Kanji
+export type CompleteKanji = { kanji: string } & Kanji;
 
 export type PaginationParams = {
-  offset: number
-  limit: number
-}
+	offset: number;
+	limit: number;
+};
 
 export type WordsResponse = PaginationParams & {
-  total: number
-  words: Word[]
-}
+	total: number;
+	words: Word[];
+};
 
 export type ErrorMsg = {
-  message: string
-}
+	message: string;
+};
