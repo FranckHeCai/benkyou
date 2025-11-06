@@ -117,7 +117,7 @@ const Kanjis = () => {
 								handleLesson(index);
 							}}
 							key={`n5 lesson ${index + 1}`}
-							className="w-full flex items-center sm:flex-col gap-4 cursor-pointer rounded-xl border-2 border-transparent hover:border-blue-500 hover:shadow-md transition-all duration-300 py-4 px-6"
+							className="w-full flex items-center sm:flex-col gap-4 cursor-pointer rounded-xl border-2 border-transparent hover:border-slate-800 hover:shadow-md transition-all duration-300 py-4 px-6"
 						>
 							<KanjiCircle
 								size={"w-20 h-20 sm:w-30 sm:h-30"}
